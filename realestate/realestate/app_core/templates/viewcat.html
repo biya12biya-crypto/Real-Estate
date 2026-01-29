@@ -1,0 +1,42 @@
+({% load static %})
+{% include 'Layout/Partials/Admin/header.html' %}
+
+        <div class="table-responsive mt-4">
+  <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
+    
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for i in list %}
+      <tr>
+        <td class="text-muted">{{ forloop.counter }}</td>
+        <td class="text-muted">{{ i.name }}</td>
+        <td class="text-muted">{{ i.description }}</td>
+        
+        <td>
+          <img src="/media/{{ i.img }}" style="width:100px; height:auto;">
+        </td>
+
+        <td>
+          <a href="{% url 'core:catdl' i.id %}">
+            <button class="btn btn-primary btn-sm">Delete</button>
+          </a>
+          <a href="{% url 'core:catup' i.id %}">
+            <button class="btn btn-secondary btn-sm">Update</button>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+</div>
+            {% include 'Layout/Partials/Admin/footer.html' %}

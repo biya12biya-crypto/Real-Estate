@@ -1,0 +1,156 @@
+from django.http import HttpResponse
+from django.shortcuts import render
+
+from app_core.models import Buyer, Category, District, Location, Property, Seller
+from realestate.users.models import User
+
+
+# Create your views here.
+def dist(request):
+    if request.method=='POST':
+        name=request.POST.get('distname')
+        print("success ")
+        if District.objects.filter(name = name ).exists():
+            return HttpResponse("<script>alert('Already Exist');window.location='/core/dist/';</script>")
+        dist=District()
+        dist.name=name
+        dist.save()
+        return HttpResponse("<script>alert('Inserted Successfully');window.location='/core/dist/';</script>")
+    else:
+        return render(request,"district.html")
+
+
+def location(request):
+    if request.method=='POST':
+        name=request.POST.get('locationname')
+        dis=request.POST.get('name1')
+        print("success ")
+        if Location.objects.filter(name = name,dis=dis ).exists():
+            return HttpResponse("<script>alert('Already Exist');window.location='/core/location/';</script>")
+        loc=Location()
+        loc.name=name
+        loc.dis=District.objects.get(id = dis)
+        loc.save()
+        return HttpResponse("<script>alert('Inserted Successfully');window.location='/core/location/';</script>")
+    else:
+        v=District.objects.all()
+        return render(request,"location.html",{"list":v})
+    
+def distview(request):
+     dt = District.objects.all()
+     return render(request,"viewdist.html",{"distview":dt})    
+
+def distde(request,name):
+     d=District.objects.get(id=name)
+     d.delete()
+     return HttpResponse("<script>alert('Deleted Successfully');window.location='/core/distview/';</script>")
+
+def districtup(request,name):
+    d=District.objects.get(id=name)
+    if request.method=="POST":
+        name=request.POST.get('name')
+        if District.objects.filter(name=name).exists():
+            return HttpResponse("<script>alert('District already exists');window.location='/core/distview';</script>")
+        d.name=name
+        d.save()
+        return HttpResponse("<script>alert('District added successfully');window.location='/core/distview';</script>")
+    return render(request,'districtup.html',{"distview":d}) 
+
+
+def  locationview(request):
+    lc = Location.objects.all()
+    return render(request,"locationview.html",{"locationview":lc})
+
+def deleteloc(request,id):
+    d=Location.objects.get(id=id)
+    d.delete()
+    return HttpResponse("<script>alert('Deleted Successfully');window.location='/core/locationview/';</script>")
+
+def locationup(request,id):
+    up = Location.objects.get(id=id)
+    if request.method=="POST":
+        name = request.POST.get('name')
+        dis = request.POST.get('dis')
+        # return HttpResponse(dis)
+        if Location.objects.filter( name=name, dis=dis ).exists():
+            return HttpResponse("<script>alert('Already Exist');window.location='';</script>")
+        up.name = name
+        up.dis = District.objects.get(id = dis)
+        up.save()
+        return HttpResponse("<script>alert('Updated Successfully');window.location='/core/locationview/';</script>")
+    list=District.objects.all()
+    return render(request,"locationup.html",{"locationv":up,"list":list})
+
+
+def category(request):
+    if request.method=='POST':
+        name=request.POST.get('name')
+        description=request.POST.get('description')
+        print("success ")
+        if Category.objects.filter(name = name ).exists():
+            return HttpResponse("<script>alert('Already Exist');window.location='/core/category/';</script>")
+        cat=Category()
+        cat.name=name
+        cat.description=description
+        if len(request.FILES) !=0:
+            img = request.FILES['img']
+        else:
+            img = 'Images/default.jpg'
+        cat.img=img
+        cat.save()
+        return HttpResponse("<script>alert('Inserted Successfully');window.location='/core/category/';</script>")
+    else:
+        return render(request,"category.html")
+    
+def viewcat(request):
+    cv=Category.objects.all()
+    return render(request,"viewcat.html",{"list":cv})   
+
+def catedl(request,name):
+    d =Category.objects.get(id =name)
+    d.delete()
+    return HttpResponse("<script>alert('Delete Successfully');window.location='/core/viewcat/';</script>")
+
+def cateup(request,name):
+    up = Category.objects.get(id=name)
+    if request.method=="POST":
+        cname = request.POST.get('name')
+        desc = request.POST.get('description')
+        img = request.FILES.get('img')
+
+        if Category.objects.filter(name=cname).exclude(id=name).exists():
+            return HttpResponse("<script>alert('Already Exist');window.location='/core/category/';</script>")
+        up.name=cname
+        up.description=desc
+        if img:
+            up.img=img
+        up.save()
+        return HttpResponse("<script>alert('Updated Successfully');window.location='/core/viewcat/';</script>")
+    return render(request,"categoryedit.html",{"catv":up})
+
+
+
+def sellerregview(request):
+     sellers =Seller.objects.all()
+     return render(request, "sellerregview.html", {"sellerregview": sellers})
+
+def buyerregview(request):
+     buyers =Buyer.objects.all()
+     return render(request, "buyerregview.html", {"buyerregview": buyers})
+
+def adminviewproperty(request):
+     adminv =Property.objects.filter(approval_status="requested")
+     return render(request, "adminviewproperty.html", {"adminviewproperty": adminv})
+
+def proreject(request,name):
+    r =Property.objects.get(id =name)
+    r.approval_status="rejected"
+    return HttpResponse("<script>alert('Rejected Successfully');window.location='/core/adminviewproperty/';</script>")
+
+def proaccept(request,name):
+    a =Property.objects.get(id =name)
+    a.approval_status="accepted"
+    return HttpResponse("<script>alert('Property Accepted Successfully');window.location='/core/adminviewproperty/';</script>")
+
+
+

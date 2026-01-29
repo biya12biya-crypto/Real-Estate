@@ -1,0 +1,94 @@
+{% load static %}
+{% include "Layout/Partials/Admin/header.html" %}
+<div class="body-wrapper-inner">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Forms</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form action="{% url 'core:districtup' distview.id %}" method="post">
+			 {% csrf_token %} 
+                    <div class="mb-3">
+                      <label for="exampleInputcatname" class="form-label">District Name</label>
+                      <input type="text" class="form-control" value={{distview.name}} id="exampleInputcatname" name="name" aria-describedby="catHelp">
+                      <div id="catHelp" class="form-text">We'll never share your details with anyone else.</div>
+                    </div>
+                    <!-- <div class="mb-3">
+                      <label for="exampleInputcatdesc" class="form-label">Description</label>
+                      <input type="text" class="form-control" value={{upd.catdesc}} id="exampleInputcatdesc" name="catdesc">
+                    </div> -->
+                    <!-- <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+              <!-- <h5 class="card-title fw-semibold mb-4">Disabled forms</h5>
+              <div class="card mb-0">
+                <div class="card-body">
+                  <form>
+                    <fieldset disabled>
+                      <legend>Disabled fieldset example</legend>
+                      <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Disabled input</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                      </div>
+                      <div class="mb-3">
+                        <label for="disabledSelect" class="form-label">Disabled select menu</label>
+                        <select id="disabledSelect" class="form-select">
+                          <option>Disabled select</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                          <label class="form-check-label" for="disabledFieldsetCheck">
+                            Can't check this
+                          </label>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button> -->
+                    <!-- </fieldset> -->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ {% load static %}
+{% include "layout/partials/admin/header.html" %}
+  <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Forms</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form method="POST" action="{% url 'core:category' %}" enctype="multipart/form-data">
+                    {% csrf_token %} 
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Category Name</label>
+                      <input type="text" class="form-control" name=name id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Description</label>
+                      <input type="text" class="form-control" name=description id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Image</label>
+                      <input type="file" class="form-control" name=img id="exampleInputPassword1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+               </div>
+          </div>
+          </div>
+          </div>
+      {% include "layout/partials/admin/footer.html" %}

@@ -1,0 +1,117 @@
+{% load static %}
+<!-- {% include 'Layout/Partials/guest/header.html' %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Your Property</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            margin-top: 25px;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #084298;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Add Property</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Property Name -->
+        <label>Property Name</label>
+        <input type="text" name="name" required>
+
+        <!-- Location -->
+        <label>Location</label>
+        <input type="text" name="location_url" required>
+
+        <!-- Property Type -->
+         <label>Property Type</label>
+        <select name="type" required>
+            <option value="">Select Type</option>
+               {% for i in list %}
+                        <option value="{{i.id}}">{{i.name}}</option>
+                        {% endfor %}
+                      </select>
+        </select>
+
+
+
+        <!-- Image -->
+        <label>Property Image</label>
+        <input type="file" name="img" accept="image/*" multiple required>
+
+        <!-- Status -->
+        <label>Status</label>
+        <select name="status" required>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+        </select>
+
+        <!-- Price -->
+        <label>Price</label>
+        <input type="number" name="price" required>
+
+        <!-- Description -->
+        <label>Description</label>
+        <textarea name="description" required></textarea>
+
+        <!-- Submit -->
+        <button type="submit" class="btn">Add Property</button>
+    </form>
+</div>
+
+</body>
+</html>
+{% include 'Layout/Partials/guest/footer.html' %}

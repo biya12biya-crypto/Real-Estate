@@ -1,0 +1,590 @@
+{% load static %}
+{% include 'Layout/Partials/Admin/header.html' %}
+<div class="row">
+            <div class="col-lg-8">
+              <div class="card w-100">
+                <div class="card-body">
+                  <div class="d-md-flex align-items-center">
+                    <div>
+                      <h4 class="card-title">KeralaNest Overview</h4>
+                      <p class="card-subtitle">
+                        Sell Vs Buy
+                      </p>
+                    </div>
+                    <div class="ms-auto">
+                      <ul class="list-unstyled mb-0">
+                        <li class="list-inline-item text-primary">
+                          <span class="round-8 text-bg-primary rounded-circle me-1 d-inline-block"></span>
+                          Sell
+                        </li>
+                        <li class="list-inline-item text-info">
+                          <span class="round-8 text-bg-info rounded-circle me-1 d-inline-block"></span>
+                          Buy
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div id="sales-overview" class="mt-4 mx-n6"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card overflow-hidden">
+                <div class="card-body pb-0">
+                  <div class="d-flex align-items-start">
+                    <div>
+                      <h4 class="card-title">Weekly Stats</h4>
+                      <p class="card-subtitle">Average sales</p>
+                    </div>
+                    <div class="ms-auto">
+                      <div class="dropdown">
+                        <a href="javascript:void(0)" class="text-muted" id="year1-dropdown" data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          <i class="ti ti-dots fs-7"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="year1-dropdown">
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0)">Action</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-4 pb-3 d-flex align-items-center">
+                    <span class="btn btn-primary rounded-circle round-48 hstack justify-content-center">
+                      <i class="ti ti-shopping-cart fs-6"></i>
+                    </span>
+                    <div class="ms-3">
+                      <h5 class="mb-0 fw-bolder fs-4">Best Category</h5>
+                      <span class="text-muted fs-3">Apartment</span>
+                    </div>
+                    <div class="ms-auto">
+                      <span class="badge bg-secondary-subtle text-muted">+68%</span>
+                    </div>
+                  </div>
+                  <div class="py-3 d-flex align-items-center">
+                    <span class="btn btn-warning rounded-circle round-48 hstack justify-content-center">
+                      <i class="ti ti-star fs-6"></i>
+                    </span>
+                    <div class="ms-3">
+                      <h5 class="mb-0 fw-bolder fs-4">Best Seller</h5>
+                      <span class="text-muted fs-3">Mr.Dominic Mathew</span>
+                    </div>
+                    <div class="ms-auto">
+                      <span class="badge bg-secondary-subtle text-muted">+68%</span>
+                    </div>
+                  </div>
+                  <div class="py-3 d-flex align-items-center">
+                    <span class="btn btn-success rounded-circle round-48 hstack justify-content-center">
+                      <i class="ti ti-message-dots fs-6"></i>
+                    </span>
+                    <div class="ms-3">
+                      <h5 class="mb-0 fw-bolder fs-4">Most Commented Property</h5>
+                      <span class="text-muted fs-3">Skyland Apartment</span>
+                    </div>
+                    <div class="ms-auto">
+                      <span class="badge bg-secondary-subtle text-muted">+68%</span>
+                    </div>
+                  </div>
+                  <div class="pt-3 mb-7 d-flex align-items-center">
+                    <span class="btn btn-secondary rounded-circle round-48 hstack justify-content-center">
+                      <i class="ti ti-diamond fs-6"></i>
+                    </span>
+                    <div class="ms-3">
+                      <h5 class="mb-0 fw-bolder fs-4">Best Sailing Month</h5>
+                      <span class="text-muted fs-3">April</span>
+                    </div>
+                    <div class="ms-auto">
+                      <span class="badge bg-secondary-subtle text-muted">+15%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-md-flex align-items-center">
+                    <div>
+                      <h4 class="card-title">Products Performance</h4>
+                      <p class="card-subtitle">
+                        Buy Vs Sell
+                      </p>
+                    </div>
+                    <div class="ms-auto mt-3 mt-md-0">
+                      <select class="form-select theme-select border-0" aria-label="Default select example">
+                        <option value="1">March 2026</option>
+                        <option value="2">April 2026</option>
+                        <option value="3">May 2026<option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="table-responsive mt-4">
+                    <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="px-0 text-muted">
+                            Assigned
+                          </th>
+                          <th scope="col" class="px-0 text-muted">Name</th>
+                          <th scope="col" class="px-0 text-muted">
+                            Priority
+                          </th>
+                          <th scope="col" class="px-0 text-muted text-end">
+                            Budget
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="px-0">
+                            <div class="d-flex align-items-center">
+                              <img src="{% static 'Admin/assets/images/profile/user-3.jpg' %}" class="rounded-circle" width="40"
+                                alt="flexy" />
+                              <div class="ms-3">
+                                <h6 class="mb-0 fw-bolder">Sunil Joshi</h6>
+                                <span class="text-muted">Managing Director</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-0">Elite Admin</td>
+                          <td class="px-0">
+                            <span class="badge bg-info">Low</span>
+                          </td>
+                          <td class="px-0 text-dark fw-medium text-end">
+                            3K
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="px-0">
+                            <div class="d-flex align-items-center">
+                              <img src="{% static 'Admin/assets/images/profile/user-5.jpg' %}" class="rounded-circle" width="40"
+                                alt="flexy" />
+                              <div class="ms-3">
+                                <h6 class="mb-0 fw-bolder">
+                                  John Abraham
+                                </h6>
+                                <span class="text-muted">Operations Manager</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-0">Real Homes WP Theme</td>
+                          <td class="px-0">
+                            <span class="badge text-bg-primary">Medium</span>
+                          </td>
+                          <td class="px-0 text-dark fw-medium text-end">
+                            24K
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="px-0">
+                            <div class="d-flex align-items-center">
+                              <img src="{% static 'Admin/assets/images/profile/user-6.jpg' %}" class="rounded-circle" width="40"
+                                alt="flexy" />
+                              <div class="ms-3">
+                                <h6 class="mb-0 fw-bolder">
+                                  Steji Kuruvila
+                                </h6>
+                                <span class="text-muted">Business Development Manager</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-0">Prime Property Panel</td>
+                          <td class="px-0">
+                            <span class="badge bg-warning">Hight</span>
+                          </td>
+                          <td class="px-0 text-dark fw-medium text-end">
+                            12.8K
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="px-0">
+                            <div class="d-flex align-items-center">
+                              <img src="{% static 'Admin/assets/images/profile/user-7.jpg' %}" class="rounded-circle" width="40"
+                                alt="flexy" />
+                              <div class="ms-3">
+                                <h6 class="mb-0 fw-bolder">Nirav Joshi</h6>
+                                <span class="text-muted">HR & Admin Head</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-0">EstateLite CMS</td>
+                          <td class="px-0">
+                            <span class="badge bg-danger">Low</span>
+                          </td>
+                          <td class="px-0 text-dark fw-medium text-end">
+                            28K
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="px-0">
+                            <div class="d-flex align-items-center">
+                              <img src="{% static 'Admin/assets/images/profile/user-8.jpg' %}" class="rounded-circle" width="40"
+                                alt="flexy" />
+                              <div class="ms-3">
+                                <h6 class="mb-0 fw-bolder">Micheal Don</h6>
+                                <span class="text-muted">Sales Coordinator</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="px-0">Helping Sales</td>
+                          <td class="px-0">
+                            <span class="badge bg-success">Low</span>
+                          </td>
+                          <td class="px-0 text-dark fw-medium text-end">
+                            9.3K
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <!-- Card -->
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title mb-0">Recent Comments</h4>
+                </div>
+                <div class="comment-widgets scrollable mb-2 common-widget" style="height: 465px" data-simplebar="">
+                  <!-- Comment Row -->
+                  <div class="d-flex flex-row comment-row border-bottom p-3 gap-3">
+                    <div>
+                      <span><img src="{% static 'Admin/assets/images/profile/user-3.jpg' %}" class="rounded-circle" alt="user"
+                          width="50" /></span>
+                    </div>
+                    <div class="comment-text w-100">
+                      <h6 class="fw-medium">James Anderson</h6>
+                      <p class="mb-1 fs-2 text-muted">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        type etting industry
+                      </p>
+                      <div class="comment-footer mt-2">
+                        <div class="d-flex align-items-center">
+                          <span class="
+                              badge
+                              bg-info-subtle
+                              text-info
+                              
+                            ">Pending</span>
+                          <span class="action-icons">
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-edit fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-check fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-heart fs-5"></i></a>
+                          </span>
+                        </div>
+                        <span class="
+                            text-muted
+                            ms-auto
+                            fw-normal
+                            fs-2
+                            d-block
+                            mt-2
+                            text-end
+                          ">April 14, 2025</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Comment Row -->
+                  <div class="d-flex flex-row comment-row border-bottom active p-3 gap-3">
+                    
+                    <div>
+                      <span><img src="{% static 'Admin/assets/images/profile/user-5.jpg' %}" class="rounded-circle" alt="user"
+                          width="50" /></span>
+                    </div>
+                    <div class="comment-text active w-100">
+                      <h6 class="fw-medium">Anand Murali</h6>
+                      <p class="mb-1 fs-2 text-muted">
+                        Very easy to search properties. I contacted the seller and got a quick response. Good experience.
+                      </p>
+                      <div class="comment-footer mt-2">
+                        <div class="d-flex align-items-center">
+                          <span class="
+                              badge
+                              bg-success-subtle
+                              text-success
+                              
+                            ">Approved</span>
+                          <span class="action-icons active">
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-edit fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-circle-x fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-heart text-danger fs-5"></i></a>
+                          </span>
+                        </div>
+                        <span class="
+                            text-muted
+                            ms-auto
+                            fw-normal
+                            fs-2
+                            text-end
+                            mt-2
+                            d-block
+                          ">April 14, 2025</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Comment Row -->
+                  <div class="d-flex flex-row comment-row border-bottom p-3 gap-3">
+                    <div>
+                      <span><img src="{% static 'Admin/assets/images/profile/user-6.jpg' %}" class="rounded-circle" alt="user"
+                          width="50" /></span>
+                    </div>
+                    <div class="comment-text w-100">
+                      <h6 class="fw-medium">Rahul P P</h6>
+                      <p class="mb-1 fs-2 text-muted">
+                       The enquiry system is not simple and helpful. Seller message option made communication not easy
+                      </p>
+                      <div class="comment-footer mt-2">
+                        <div class="d-flex align-items-center">
+                          <span class="
+                              badge
+                              bg-danger-subtle
+                              text-danger
+                              
+                            ">Rejected</span>
+                          <span class="action-icons">
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-edit fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-check fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-heart fs-5"></i></a>
+                          </span>
+                        </div>
+                        <span class="
+                            text-muted
+                            ms-auto
+                            fw-normal
+                            fs-2
+                            d-block
+                            mt-2
+                            text-end
+                          ">April 14, 2025</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Comment Row -->
+                  <div class="d-flex flex-row comment-row p-3 gap-3">
+                    <div>
+                      <span><img src="{% static 'Admin/assets/images/profile/user-4.jpg' %}" class="rounded-circle" alt="user"
+                          width="50" /></span>
+                    </div>
+                    <div class="comment-text w-100">
+                      <h6 class="fw-medium">Nithin R</h6>
+                      <p class="mb-1 fs-2 text-muted">
+                        Property details are clear with images and location. Overall very useful website.
+                      </p>
+                      <div class="comment-footer mt-2">
+                        <div class="d-flex align-items-center">
+                          <span class="
+                              badge
+                              bg-info-subtle
+                              text-info
+                              
+                            ">Pending</span>
+                          <span class="action-icons">
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-edit fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-check fs-5"></i></a>
+                            <a href="javascript:void(0)" class="ps-3"><i class="ti ti-heart fs-5"></i></a>
+                          </span>
+                        </div>
+                        <span class="
+                            text-muted
+                            ms-auto
+                            fw-normal
+                            fs-2
+                            d-block
+                            text-end
+                            mt-2
+                          ">April 14, 2025</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+<div class="card h-100">
+  <div class="card-body">
+
+    <h4 class="card-title mb-4">Review Details</h4>
+
+    <!-- User Info -->
+    <div class="d-flex align-items-center mb-4">
+      <!-- <img src="{% static 'images/user.png' %}" 
+           class="rounded-circle me-3" 
+           width="60" height="60"> -->
+      <div>
+        <h6 class="mb-0">Anand Murali</h6>
+        <small class="text-muted">Buyer</small>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Review Content -->
+    <div class="mb-4">
+      <h6>Review Message</h6>
+      <p class="text-muted">
+        Very easy to search properties. I contacted the seller and got a quick response.
+        Good experience.
+      </p>
+    </div>
+
+    <!-- Status -->
+    <div class="mb-4">
+      <h6>Status</h6>
+      <span class="badge bg-success">Approved</span>
+    </div>
+
+    <!-- Rating -->
+    <div class="mb-4">
+      <h6>Rating</h6>
+      ⭐⭐⭐⭐☆
+    </div>
+
+    <!-- Property Info -->
+    <div class="mb-4">
+      <h6>Property</h6>
+      <p class="mb-1"><strong>2BHK Villa – Kochi</strong></p>
+      <small class="text-muted">Property ID: #PR1023</small>
+    </div>
+
+    <!-- Date -->
+    <div class="mb-4">
+      <h6>Submitted On</h6>
+      <p class="text-muted">April 14, 2025</p>
+    </div>
+
+    <!-- Admin Actions -->
+    <!-- <div class="d-flex gap-2">
+      <button class="btn btn-success w-100">Approve</button>
+      <button class="btn btn-danger w-100">Reject</button>
+    </div> -->
+
+  </div>
+</div>
+
+
+
+        <div class="card w-100">
+  <div class="card-body">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="card-title mb-0">Property Overview</h4>
+      <span class="badge bg-primary">Kerala Real Estate</span>
+    </div>
+
+    <p class="text-muted mb-4">
+      System summary and current platform status
+    </p>
+
+    <div class="row text-center">
+
+      <div class="col-md-4 mb-3">
+        <h3 class="text-primary">128</h3>
+        <p class="mb-0">Total Properties</p>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h3 class="text-success">96</h3>
+        <p class="mb-0">Available Properties</p>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h3 class="text-danger">32</h3>
+        <p class="mb-0">Sold Properties</p>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h3 class="text-info">214</h3>
+        <p class="mb-0">Total Buyers</p>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h3 class="text-warning">46</h3>
+        <p class="mb-0">Total Sellers</p>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h3 class="text-secondary">18</h3>
+        <p class="mb-0">Pending Enquiries</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+            <!-- <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <h4 class="card-title mb-0">Weather Report</h4>
+                    <select class="form-select w-auto ms-auto">
+                      <option selected="">Today</option>
+                      <option value="1">Weekly</option>
+                    </select>
+                  </div>
+                  <div class="d-flex align-items-center flex-row mt-4">
+                    <div class="p-2 display-5 text-primary">
+                      <i class="ti ti-cloud-snow"></i>
+                      <span>73<sup>°</sup></span>
+                    </div>
+                    <div class="p-2">
+                      <h3 class="mb-0">Saturday</h3>
+                      <small>Ahmedabad, India</small>
+                    </div>
+                  </div>
+                  <table class="table table-borderless">
+                    <tbody>
+                      <tr>
+                        <td>Wind</td>
+                        <td class="fw-medium">ESE 17 mph</td>
+                      </tr>
+                      <tr>
+                        <td>Humidity</td>
+                        <td class="fw-medium">83%</td>
+                      </tr>
+                      <tr>
+                        <td>Pressure</td>
+                        <td class="fw-medium">28.56 in</td>
+                      </tr>
+                      <tr>
+                        <td>Cloud Cover</td>
+                        <td class="fw-medium">78%</td>
+                      </tr>
+                      <tr>
+                        <td>Ceiling</td>
+                        <td class="fw-medium">25760 ft</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <hr />
+                  <ul class="list-unstyled row text-center city-weather-days mb-0">
+                    <li class="col">
+                      <i class="ti ti-sun-high fs-4"></i><span>09:30</span>
+                      <h3 class="mb-0 fs-6 lh-base">70<sup>°</sup></h3>
+                    </li>
+                    <li class="col">
+                      <i class="ti ti-cloud fs-4"></i><span>11:30</span>
+                      <h3 class="mb-0 fs-6 lh-base">72<sup>°</sup></h3>
+                    </li>
+                    <li class="col">
+                      <i class="ti ti-cloud-rain fs-4"></i><span>13:30</span>
+                      <h3 class="mb-0 fs-6 lh-base">75<sup>°</sup></h3>
+                    </li>
+                    <li class="col">
+                      <i class="ti ti-cloud-snow fs-4"></i><span>15:30</span>
+                      <h3 class="mb-0 fs-6 lh-base">76<sup>°</sup></h3>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div> -->
+          </div>
+ {% include 'Layout/Partials/Admin/footer.html' %}

@@ -1,0 +1,37 @@
+{% load static %}
+{% include 'Layout/Partials/buyer/header.html' %}
+<div class="site-section" id="properties-section">
+      <div class="container">
+        <div class="row mb-5 align-items-center">
+          <div class="col-md-7 text-left">
+            <h2 class="section-title mb-3">CATEGORIES</h2>
+          </div>
+          <div class="col-md-5 text-left text-md-right">
+            <div class="custom-nav1">
+              <a href="#" class="custom-prev1">Previous</a><span class="mx-3">/</span><a href="#" class="custom-next1">Next</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="owl-carousel nonloop-block-13 mb-5">
+        {% for i in category %}
+          <div class="property">
+            <a href="{% url 'buyer:viewproperty' i.id %}">
+              <img src="/media/{{i.img}}" alt="Image" class="img-fluid" width="500px" style="height: 300px;">
+            </a>
+            <div class="prop-details p-3">
+              <div><strong class="price">{{ i.name }}</strong></div>
+
+              <div><strong class="price">{{ i.price }}</strong></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <a href="listings.html" class="btn btn-primary btn-block">View All Property Listings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+   {% include 'Layout/Partials/buyer/footer.html' %}

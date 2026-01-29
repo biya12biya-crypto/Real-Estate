@@ -1,0 +1,57 @@
+{% load static %}
+{% include 'Layout/Partials/buyer/header.html' %}
+
+<table class="table">
+  <tr>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Message</th>
+    <th>Action</th>
+  </tr>
+
+  {% for e in enquiry %}
+  <tr>
+    <td>{{ e.property.name }}</td>
+    <td>{{ e.status }}</td>
+
+    <td>
+      {% if e.msg %}
+        <button class="btn btn-info"
+                data-toggle="modal"
+                data-target="#msgModal{{ e.id }}">
+          View Message
+        </button>
+                    <td><a href="{% url 'buyer:deletemodal' e.id %}"><button type="submit" class="btn btn-danger">Remove</button></a></td>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="msgModal{{ e.id }}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5>Seller Message</h5>
+              </div>
+
+              <div class="modal-body">
+                {{ e.msg }}
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">
+                  Close
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      {% else %}
+        No message
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% include 'Layout/Partials/buyer/footer.html' %}

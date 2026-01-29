@@ -1,0 +1,51 @@
+ {% load static %}
+{% include 'Layout/Partials/buyer/header.html' %}
+  <section class="site-section" id="about-section">
+  <div class="container">
+    <div class="row">
+      
+      <!-- Left Image Slider -->
+      <div class="col-lg-6">
+        <div class="owl-carousel slide-one-item-alt">
+          {% for i in images %}
+          <img src="/media/{{i.img}}" alt="Image" class="img-fluid" style="height: 400px;">
+         
+{% endfor %}
+        </div>
+        <div class="custom-direction">
+          <a href="#" class="custom-prev"><</a>
+          <a href="#" class="custom-next">></a>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="col-lg-5 ml-auto">
+        <h2 class="section-title mb-3">{{category.name}}</h2>
+        <!-- <p class="lead">Your journey to the right property starts here.</p> -->
+        <p>
+         {{category.description}}
+        </p>
+
+        <p>₹ {{category.price}}</p>
+
+        <p>
+          <form action="{% url 'buyer:aboutview' category.id %}" method="POST">
+            {% csrf_token %}
+          <!-- <a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a> -->
+            <td>
+          
+            <button class="btn btn-primary btn-sm" name="favorite">Add to Favorite</button>
+         
+            <button class="btn btn-dark btn-sm" name="enquiry">Enquiry</button>
+         
+        </td>
+        </form>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% include 'Layout/Partials/buyer/footer.html' %}
