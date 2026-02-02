@@ -12,6 +12,8 @@ urlpatterns = [
   path("buyerreg/",views.buyerreg,name='buyerreg'),
     path("sellerdashboard/",views.sellerdashboard,name='sellerdashboard'),
     path("buyerdashboard/",views.buyerdashboard,name='buyerdashboard'),
+    path("logout/",views.logout_view,name='logout'),
+
     
 
 

@@ -3,9 +3,13 @@ from django.shortcuts import render
 
 from app_core.models import Buyer, Category, District, Location, Property, Seller
 from realestate.users.models import User
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
 
 # Create your views here.
+@never_cache
+@login_required(login_url='/login/')
 def dist(request):
     if request.method=='POST':
         name=request.POST.get('distname')
@@ -19,7 +23,8 @@ def dist(request):
     else:
         return render(request,"district.html")
 
-
+@never_cache
+@login_required(login_url='/login/')
 def location(request):
     if request.method=='POST':
         name=request.POST.get('locationname')
@@ -36,15 +41,21 @@ def location(request):
         v=District.objects.all()
         return render(request,"location.html",{"list":v})
     
+@never_cache
+@login_required(login_url='/login/')   
 def distview(request):
      dt = District.objects.all()
      return render(request,"viewdist.html",{"distview":dt})    
 
+@never_cache
+@login_required(login_url='/login/')
 def distde(request,name):
      d=District.objects.get(id=name)
      d.delete()
      return HttpResponse("<script>alert('Deleted Successfully');window.location='/core/distview/';</script>")
 
+@never_cache
+@login_required(login_url='/login/')
 def districtup(request,name):
     d=District.objects.get(id=name)
     if request.method=="POST":
@@ -56,16 +67,21 @@ def districtup(request,name):
         return HttpResponse("<script>alert('District added successfully');window.location='/core/distview';</script>")
     return render(request,'districtup.html',{"distview":d}) 
 
-
+@never_cache
+@login_required(login_url='/login/')
 def  locationview(request):
     lc = Location.objects.all()
     return render(request,"locationview.html",{"locationview":lc})
 
+@never_cache
+@login_required(login_url='/login/')
 def deleteloc(request,id):
     d=Location.objects.get(id=id)
     d.delete()
     return HttpResponse("<script>alert('Deleted Successfully');window.location='/core/locationview/';</script>")
 
+@never_cache
+@login_required(login_url='/login/')
 def locationup(request,id):
     up = Location.objects.get(id=id)
     if request.method=="POST":
@@ -81,7 +97,8 @@ def locationup(request,id):
     list=District.objects.all()
     return render(request,"locationup.html",{"locationv":up,"list":list})
 
-
+@never_cache
+@login_required(login_url='/login/')
 def category(request):
     if request.method=='POST':
         name=request.POST.get('name')
@@ -101,16 +118,22 @@ def category(request):
         return HttpResponse("<script>alert('Inserted Successfully');window.location='/core/category/';</script>")
     else:
         return render(request,"category.html")
-    
+
+@never_cache
+@login_required(login_url='/login/')    
 def viewcat(request):
     cv=Category.objects.all()
     return render(request,"viewcat.html",{"list":cv})   
 
+@never_cache
+@login_required(login_url='/login/')
 def catedl(request,name):
     d =Category.objects.get(id =name)
     d.delete()
     return HttpResponse("<script>alert('Delete Successfully');window.location='/core/viewcat/';</script>")
 
+@never_cache
+@login_required(login_url='/login/')
 def cateup(request,name):
     up = Category.objects.get(id=name)
     if request.method=="POST":
@@ -129,24 +152,33 @@ def cateup(request,name):
     return render(request,"categoryedit.html",{"catv":up})
 
 
-
+@never_cache
+@login_required(login_url='/login/')
 def sellerregview(request):
      sellers =Seller.objects.all()
      return render(request, "sellerregview.html", {"sellerregview": sellers})
 
+@never_cache
+@login_required(login_url='/login/')
 def buyerregview(request):
      buyers =Buyer.objects.all()
      return render(request, "buyerregview.html", {"buyerregview": buyers})
 
+@never_cache
+@login_required(login_url='/login/')
 def adminviewproperty(request):
      adminv =Property.objects.filter(approval_status="requested")
      return render(request, "adminviewproperty.html", {"adminviewproperty": adminv})
 
+@never_cache
+@login_required(login_url='/login/')
 def proreject(request,name):
     r =Property.objects.get(id =name)
     r.approval_status="rejected"
     return HttpResponse("<script>alert('Rejected Successfully');window.location='/core/adminviewproperty/';</script>")
 
+@never_cache
+@login_required(login_url='/login/')
 def proaccept(request,name):
     a =Property.objects.get(id =name)
     a.approval_status="accepted"

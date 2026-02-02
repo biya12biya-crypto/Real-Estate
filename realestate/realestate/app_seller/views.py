@@ -3,8 +3,11 @@ from django.shortcuts import render
 
 from app_core.models import Category, Property, PropertyImage
 from app_buyer.models import Enquiry
-
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 # Create your views here.
+@never_cache
+@login_required(login_url='/login/')
 def propertyreg(request):
     if request.method=='POST':
         name=request.POST.get('name')
@@ -31,11 +34,14 @@ def propertyreg(request):
 
     return render(request, 'propertyreg.html')
     
-
+@never_cache
+@login_required(login_url='/login/')
 def propertyregview(request):
      pr =Property.objects.all()
      return render(request, "propertyregview.html", {"propertyregview": pr})
 
+@never_cache
+@login_required(login_url='/login/')
 def enquiryview(request):
     if request.method=="POST":
         id=request.POST.get("id")
@@ -48,12 +54,15 @@ def enquiryview(request):
     n= Enquiry.objects.filter(status="requested",property__user=request.user)
     return render(request, "enquiryview.html", {"enquiry": n})
 
-
+@never_cache
+@login_required(login_url='/login/')
 def deleteenqv(request,id):
     r=Enquiry.objects.get(id=id)
     r.delete()
     return HttpResponse("<script>alert('Removed Successfully');window.location='/seller/enquiryview/';</script>")
 
+@never_cache
+@login_required(login_url='/login/')
 def enqaccept(request):
     
         return HttpResponse("<script>alert('Enquiry Approved Successfully');window.location='/seller/enquiryview/';</script>")

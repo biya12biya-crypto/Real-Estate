@@ -3,19 +3,27 @@ from django.shortcuts import render
 
 from app_core.models import Property,Category, PropertyImage
 from app_buyer.models import Enquiry, Favorite
-
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 # Create your views here.
+@never_cache
+@login_required(login_url='/login/')
 def viewproperty(request,id):
     c=Property.objects.filter(type=id)
     return render(request, 'viewproperty.html',{"propertyregview":c})
+
+@never_cache
+@login_required(login_url='/login/')
 def viewcategory(request):
     c=Category.objects.all()
     return render(request, 'viewcategory.html',{"category":c})
 
+@never_cache
+@login_required(login_url='/login/')
 def aboutview(request,id):
     if request.method=="POST":
         if 'favorite' in request.POST:
-            if Favorite.objects.filter(property=id).exists():
+            if Favorite.objects.filter(property=id,user=request.user).exists():
                 return HttpResponse("<script>alert('Already Exists');window.location='/buyer/favorite/';</script>")
             fav=Favorite()
             fav.user=request.user
@@ -37,33 +45,42 @@ def aboutview(request,id):
 
     return render(request, 'aboutview.html',{"category":c,"images":image})
 
+@never_cache
+@login_required(login_url='/login/')
 def favorite(request):
     f=Favorite.objects.filter(user=request.user)
     return render(request, 'favorite.html',{"aboutview":f})
 
 
-
+@never_cache
+@login_required(login_url='/login/')
 def deletefav(request,id):
     d=Favorite.objects.get(id=id)
     d.delete()
     return HttpResponse("<script>alert('Removed Successfully');window.location='/buyer/favorite/';</script>")
 
-
+@never_cache
+@login_required(login_url='/login/')
 def enquiry(request):
     e=Enquiry.objects.filter(user=request.user)
     return render(request, 'enquiry.html',{"aboutview":e})
 
-
+@never_cache
+@login_required(login_url='/login/')
 def deleteenq(request,id):
         q=Enquiry.objects.get(id=id)
         q.status='cancelled'
         q.save()
         return HttpResponse("<script>alert('Cancelled Successfully');window.location='/buyer/enquiry/';</script>")
 
+@never_cache
+@login_required(login_url='/login/')
 def modalview(request):
     e=Enquiry.objects.filter(user=request.user)
     return render(request, 'modalview.html', {"enquiry":e})
 
+@never_cache
+@login_required(login_url='/login/')
 def deletemodal(request,id):
     d=Enquiry.objects.get(id=id)
     d.delete()

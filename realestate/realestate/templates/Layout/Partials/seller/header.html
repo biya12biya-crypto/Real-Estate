@@ -40,27 +40,27 @@
     </div>
    
     
-    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner" style="background-color: #525c6685;">
 
       <div class="container">
         <div class="row align-items-center">
           
           <div class="col-6 col-xl-2">
-            <h1 class="mb-0 site-logo m-0 p-0"><a href="index.html" class="mb-0">Stated.</a></h1>
+            <h1 class="mb-0 site-logo m-0 p-0" style="text-transform: capitalize;"><a href="index.html" class="mb-0">KeralaNest</a></h1>
           </div>
 
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="#home-section" class="nav-link">Home</a></li>
+                <li><a href="{% url 'dashboard:sellerdashboard' %}" class="nav-link">Home</a></li>
                 <li><a href="{% url 'seller:propertyreg' %}" class="nav-link">Add Property</a></li>
-                <li><a href="#properties-section" class="nav-link">Properties</a></li>
-                <li><a href="#agents-section" class="nav-link">Agents</a></li>
+                
                 <li><a href="{% url 'seller:enquiryview' %}" class="nav-link">View Enquiries</a></li>
-                <li><a href="#about-section" class="nav-link">About</a></li>
-                <li><a href="#news-section" class="nav-link">Add </a></li>
-                <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                 <li><a href="{% url 'dashboard:logout' %}" class="nav-link">Logout</a></li>
+               
+               
               </ul>
             </nav>
           </div>

@@ -5,14 +5,22 @@ from django.shortcuts import redirect, render
 
 from app_core.models import Buyer, Property, Seller
 from realestate.users.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
+
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
 
 
 
 
+@never_cache
+@login_required(login_url='/login/')
 def admin(request):
     return render(request, 'admindashboard.html')
+
+@never_cache
+@login_required(login_url='/login/')
 def guest(request):
     return render(request, 'guestdashboard.html')
 
@@ -97,11 +105,20 @@ def buyerreg(request):
         return HttpResponse("<script>alert('Registration Successfull.Please Login');window.location='/login/';</script>") 
     return render(request,'buyerreg.html')
 
+@never_cache
+@login_required(login_url='/login/')
 def sellerdashboard(request):
     return render(request, 'sellerdashboard.html')
 
+@never_cache
+@login_required(login_url='/login/')
 def buyerdashboard(request):
     return render(request, 'buyerdashboard.html')
 
 
 
+def logout_view(request):
+    logout(request)
+    return HttpResponse(
+        "<script>alert('Logged out successfully');window.location='/login/';</script>"
+    )
