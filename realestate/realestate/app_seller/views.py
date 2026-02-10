@@ -28,7 +28,7 @@ def propertyreg(request):
                 img=img
             )
 
-        return HttpResponse("<script>alert('Property added successfully');window.location='/seller/propertyregview/';</script>") 
+        return HttpResponse("<script>alert('Property added successfully');window.location='/sellerdashboard/';</script>") 
     cat =Category.objects.all()
     return render(request, "propertyreg.html", {"list": cat})
 

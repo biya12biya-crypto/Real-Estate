@@ -12,7 +12,7 @@ urlpatterns = [
      path("deleteenq/<int:id>",views.deleteenq,name='deleteenq'),
    path("modalview/",views.modalview,name='modalview'),
     path("deletemodal/<int:id>",views.deletemodal,name='deletemodal'),
-
+ path("listings/",views.listings,name='listings'),
 
 
 

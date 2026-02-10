@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Reset Password | KeralaNest</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f9ff;
+    }
+
+    /* Header */
+    .header {
+      background-color: #0d6efd; /* blue */
+      color: white;
+      padding: 15px 40px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    /* Main content */
+    .container {
+      max-width: 400px;
+      margin: 80px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0b5ed7;
+    }
+
+    .message {
+      margin-top: 10px;
+      color: green;
+    }
+
+    a {
+      color: #0d6efd;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #0d6efd;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>KeralaNest</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <h2>Reset Password</h2>
+
+    <form method="post">
+  {% csrf_token %}
+  <input type="text" class="form-control" name="otp" placeholder="Enter OTP" required>
+  <button type="submit" name="action" value="verify">Verify OTP</button>
+  <button type="submit" name="action" value="resend">Resend OTP</button>
+</form>
+
+
+    <br>
+    <a href="{% url 'dashboard:login' %}">← Back to Login</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2026 KeralaNest. All rights reserved.
+  </div>
+
+</body>
+</html>

@@ -85,3 +85,8 @@ def deletemodal(request,id):
     d=Enquiry.objects.get(id=id)
     d.delete()
     return HttpResponse("<script>alert('Removed Successfully');window.location='/buyer/modalview/';</script>")
+
+def listings(request):
+    propertyregview = Property.objects.all()
+    return render(request, 'buyer/listings.html', { 'propertyregview': propertyregview })
+

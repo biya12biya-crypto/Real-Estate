@@ -13,8 +13,10 @@ urlpatterns = [
     path("sellerdashboard/",views.sellerdashboard,name='sellerdashboard'),
     path("buyerdashboard/",views.buyerdashboard,name='buyerdashboard'),
     path("logout/",views.logout_view,name='logout'),
+path("forget/",views.forget,name='forget'),
+path("reset/",views.reset,name='reset'),   
+path("verify_otp/",views.verify_otp,name='verify_otp'),    
 
-    
 
 
 ]
