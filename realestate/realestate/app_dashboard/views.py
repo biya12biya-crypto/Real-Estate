@@ -39,7 +39,7 @@ def log (request):
             elif user.role=="seller":
                 login(request,user)
                 return HttpResponse("<script>alert('Login Successfully');window.location='/sellerdashboard/';</script>")
-            elif user.role=="buyer" or user.role=="both":
+            elif user.role=="buyer":
                 login(request,user)
                 return HttpResponse("<script>alert('Login Successfully');window.location='/buyerdashboard/';</script>")
             else:
@@ -50,42 +50,65 @@ def log (request):
     else:
         return render(request,"login.html")
     
-def register(request):
-    if request.method == 'POST':
-        role_select = request.POST.get('role_select')
-        username = request.POST.get('username')
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        contact = request.POST.get('contact')
-        address = request.POST.get('address')
-
-        if not username or not password or not role_select:
-            return HttpResponse("<script>alert('All fields are required');window.location='/register/';</script>")
-
+def sellerreg(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        password=request.POST.get('password')   
+        contact=request.POST.get('contact')
+        address=request.POST.get('address')
+        
+        if not username or not password:
+            # reg(request,user)
+            return HttpResponse("<script>alert('Username and Password are required');window.location='/sellerreg/';</script>") 
         if User.objects.filter(username=username).exists():
-            return HttpResponse("<script>alert('Username already Exists');window.location='/register/';</script>")
-
-        user = User()
-        user.username = username
-        user.email = email
-        user.name = name
-        user.role = role_select
+            # reg(request,user)
+            return HttpResponse("<script>alert('Username already Exists');window.location='/sellerreg/';</script>") 
+        user=User()
+        user.username=username
+        user.email=email
+        user.name=name
+        user.role="seller"
         user.set_password(password)
         user.save()
+        send_mail(subject="Registration successfull",message=f"Hai {name} Welcome To KeralaNest",from_email=None,recipient_list=[email])
 
-        send_mail(subject="Registration successfull", message=f"Hai {name} Welcome To KeralaNest", from_email=None, recipient_list=[email])
+        Seller.objects.create(user=user,contact=contact,address=address)
+        # messages.success(request,"Registration Successfull.Please Login")
+        # return redirect('app_dashboard:login')
+        return HttpResponse("<script>alert('Registration Successfull.Please Login');window.location='/login/';</script>") 
+    return render(request,'sellerreg.html')
 
-        if role_select == 'buyer':
-            Buyer.objects.create(user=user, contact=contact, address=address)
-        elif role_select == 'seller':
-            Seller.objects.create(user=user, contact=contact, address=address)
-        elif role_select == 'both':
-            Buyer.objects.create(user=user, contact=contact, address=address)
-            Seller.objects.create(user=user, contact=contact, address=address)
 
-        return HttpResponse("<script>alert('Registration Successfull. Please Login');window.location='/login/';</script>")
-    return render(request, 'registration.html')
+def buyerreg(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        password=request.POST.get('password')   
+        contact=request.POST.get('contact')
+        address=request.POST.get('address')
+        
+        if not username or not password:
+            # reg(request,user)
+            return HttpResponse("<script>alert('Username and Password are required');window.location='/buyerreg/';</script>") 
+        if User.objects.filter(username=username).exists():
+            # reg(request,user)
+            return HttpResponse("<script>alert('Username already Exists');window.location='/buyerreg/';</script>") 
+        user=User()
+        user.username=username
+        user.email=email
+        user.name=name
+        user.role="buyer"
+        user.set_password(password)
+        user.save()
+        send_mail(subject="Registration successfull",message=f"Hai {name}",from_email=None,recipient_list=[email])
+        Buyer.objects.create(user=user,contact=contact,address=address)
+        # messages.success(request,"Registration Successfull.Please Login")
+        # return redirect('app_dashboard:login')
+        return HttpResponse("<script>alert('Registration Successfull.Please Login');window.location='/login/';</script>") 
+    return render(request,'buyerreg.html')
 
 @never_cache
 @login_required(login_url='/login/')
