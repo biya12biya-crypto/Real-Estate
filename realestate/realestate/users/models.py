@@ -17,8 +17,9 @@ class User(AbstractUser):
     username=CharField(_("Username"),unique=True)
     password=CharField(_("Password"),unique=True)
     email=models.EmailField(_("email"),unique=True)
-    role_choices=[('buyer','buyer'),('seller','seller')]
+    role_choices=[('buyer','buyer'),('seller','seller'), ('both', 'both'), ('admin', 'admin'), ('registrar', 'registrar')]
     role=models.CharField(_("Role"),choices=role_choices,null=False,blank=False,default='admin')
+
 
     
 

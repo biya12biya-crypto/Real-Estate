@@ -38,6 +38,8 @@ class Property(models.Model):
         role_choices=[('requested','requested'),('accepted','acceped'),('rejected','rejected')]
         approval_status=models.CharField(("Approval_Status"),choices=role_choices,null=False,blank=False,default='requested')
         user=models.ForeignKey(User,on_delete=models.CASCADE,default=1,related_name="property_seller")
+        registrar=models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True,related_name="registrar")
+        doc=models.FileField(upload_to="media/",null=True,blank=True) 
 
 
 class PropertyImage(models.Model):

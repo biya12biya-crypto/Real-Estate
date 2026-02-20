@@ -5,7 +5,7 @@ from app_core.models import Buyer, Category, District, Location, Property, Selle
 from realestate.users.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
-
+from django.core.mail import send_mail
 
 # Create your views here.
 @never_cache
@@ -167,8 +167,11 @@ def buyerregview(request):
 @never_cache
 @login_required(login_url='/login/')
 def adminviewproperty(request):
-     adminv =Property.objects.filter(approval_status="requested")
-     return render(request, "adminviewproperty.html", {"adminviewproperty": adminv})
+       adminv =Property.objects.filter(approval_status="requested")
+       return render(request, "adminviewproperty.html", {"adminviewproperty": adminv})
+
+
+   
 
 @never_cache
 @login_required(login_url='/login/')
@@ -184,5 +187,38 @@ def proaccept(request,name):
     a.approval_status="accepted"
     return HttpResponse("<script>alert('Property Accepted Successfully');window.location='/core/adminviewproperty/';</script>")
 
+def registrarreg(request):
+    if request.method == 'POST':
+        role_select = "registrar"
+        name = request.POST.get('registrar_name')
+        email = request.POST.get('email')
+        
+        user = User()
+        user.username = "user123"
+        user.email = email
+        user.name = name
+        user.role = role_select
+        user.set_password("pass123") 
+        user.save()
+        send_mail(subject="Registration successfull", message=f"Hai {name} Welcome To KeralaNest", from_email=None, recipient_list=[email])
+        return HttpResponse("<script>alert('Registration Successfull.');window.location='/core/registrarreg/';</script>")
+    registrarreg=User.objects.filter(role="registrar")
+    return render(request,"registrarreg.html",{"registrarreg":registrarreg})
 
+# def regaccept(request,id):
+#     a =Property.objects.get(id =id)
+#     user=User.objects.get(role="registrar")
+#     a.registrar=user
+#     a.save()
+#     return HttpResponse("<script>alert('Property assigned to registrar');window.location='/core/adminviewproperty/';</script>")
 
+def regaccept(request, id):
+    prop = Property.objects.get(id=id)
+
+    registrar_user = User.objects.get(role="registrar")  # only one registrar
+
+    prop.registrar = registrar_user
+    prop.approval_status = "accepted"
+    prop.save()
+
+    return redirect("core:adminviewproperty")

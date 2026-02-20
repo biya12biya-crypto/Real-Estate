@@ -23,6 +23,6 @@ urlpatterns = [
   path("proaccept/<int:name>",views.proaccept,name='proaccept'),
   path("sellerregview/",views.sellerregview,name='sellerregview'),
   
-  
-  
+  path("registrarreg/",views.registrarreg,name='registrarreg'),
+  path("regaccept/<int:id>",views.regaccept,name='regaccept'),
     ]

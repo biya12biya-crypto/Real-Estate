@@ -20,6 +20,8 @@
                                 <h1 class="text-primary fw-bold">JOIN KERALANEST</h1>
                                 <p class="text-muted">Register as a Buyer, Seller, or Both</p>
                             </div>
+                            <div class="row">
+    <div class="col-md-6">
 
                             <!-- Role Selection -->
                             <div class="mb-4">
@@ -42,59 +44,73 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Username -->
-                            <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control" placeholder="Enter username"
-                                    required>
                             </div>
-                            <!-- name -->
-                            <div class="mb-3">
-                                <label class="form-label">Full Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Enter your full name"
-                                    required>
-                            </div>
+                                <div class="col-md-6">
+                                    <!-- Username -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Username</label>
+                                        <input type="text" name="username" class="form-control"
+                                            placeholder="Enter username" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- name -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Enter your full name" required>
+                                    </div>
+                                </div>
 
-                            <!-- Email -->
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Enter email"
-                                    required>
-                            </div>
 
-                            <!-- Password -->
-                            <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter password"
-                                    required>
-                            </div>
 
-                            <!-- Phone -->
-                            <div class="mb-3">
-                                <label class="form-label">Phone Number</label>
-                                <input type="text" name="contact" class="form-control" placeholder="Enter phone number"
-                                    required>
-                            </div>
+                                <div class="col-md-6">
 
-                            <!-- Address -->
-                            <div class="mb-4">
-                                <label class="form-label">Address</label>
-                                <textarea name="address" class="form-control" rows="3" placeholder="Enter address"
-                                    required></textarea>
-                            </div>
+                                    <!-- Email -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" name="email" class="form-control" placeholder="Enter email"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
 
-                            <!-- Submit -->
-                            <button type="submit" class="btn btn-primary w-100 py-2 fs-5 rounded-2">
-                                Register
-                            </button>
 
-                            <div class="text-center mt-3">
-                                <p class="mb-0">
-                                    Already have an account?
-                                    <a href="{% url 'dashboard:login' %}" class="text-primary fw-bold">Sign In</a>
-                                </p>
-                            </div>
+                                    <!-- Password -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="Enter password" required>
+                                    </div>
+                                </div>
+                                    <div class="col-md-6">
+
+                                <!-- Phone -->
+                                <div class="mb-3">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="text" name="contact" class="form-control"
+                                        placeholder="Enter phone number" required>
+                                </div>
+</div>
+                                <!-- Address -->
+                                <div class="mb-4">
+                                    <label class="form-label">Address</label>
+                                    <textarea name="address" class="form-control" rows="3" placeholder="Enter address"
+                                        required></textarea>
+                                </div>
+
+                                <!-- Submit -->
+                                <button type="submit" class="btn btn-primary w-100 py-2 fs-5 rounded-2">
+                                    Register
+                                </button>
+
+                                <div class="text-center mt-3">
+                                    <p class="mb-0">
+                                        Already have an account?
+                                        <a href="{% url 'dashboard:login' %}" class="text-primary fw-bold">Sign In</a>
+                                    </p>
+                                </div>
+                                </div>
                         </form>
 
                     </div>

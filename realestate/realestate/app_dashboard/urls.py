@@ -15,7 +15,7 @@ urlpatterns = [
 path("forget/",views.forget,name='forget'),
 path("reset/",views.reset,name='reset'),   
 path("verify_otp/",views.verify_otp,name='verify_otp'),    
-
+path("propertyview/", views.propertyview, name='propertyview'),
 
 
 ]

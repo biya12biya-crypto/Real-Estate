@@ -65,21 +65,26 @@
     </style>
 </head>
 <body>
-
+                        <div class="row">
+    
 <div class="form-container">
      <h1 class="text-primary fw-bold mb-4">Add Property</h1>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+         <div class="row">
         <!-- Property Name -->
+          <div class="col-md-6">
         <label>Property Name</label>
         <input type="text" name="name" required>
-
+  </div>
         <!-- Location -->
+          <div class="col-md-6">
         <label>Location</label>
         <input type="text" name="location_url" required>
-
+  </div>
         <!-- Property Type -->
+          <div class="col-md-6">
          <label>Property Type</label>
         <select name="type" required>
             <option value="">Select Type</option>
@@ -89,30 +94,39 @@
                       </select>
         </select>
 
-
+  </div>
 
         <!-- Image -->
+          <div class="col-md-6">
         <label>Property Image</label>
         <input type="file" name="img" accept="image/*" multiple required>
-
+  </div>
+  <div class="col-md-6">
+        <label>Documents</label>
+        <input type="file" name="img" accept="image/*" multiple required>
+  </div>
         <!-- Status -->
+          <div class="col-md-6">
         <label>Status</label>
         <select name="status" required>
             <option value="Available">Available</option>
             <option value="Not Available">Not Available</option>
         </select>
-
+  </div>
         <!-- Price -->
+          <div class="col-md-6">
         <label>Price</label>
         <input type="number" name="price" required>
-
+  </div>
         <!-- Description -->
+          <div class="col-md-6">
         <label>Description</label>
         <textarea name="description" required></textarea>
-
+  </div>
         <!-- Submit -->
         <button type="submit" class="btn">Add Property</button>
     </form>
+</div>
 </div>
 </div>
 </div>

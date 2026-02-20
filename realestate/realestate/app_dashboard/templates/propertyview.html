@@ -13,8 +13,8 @@
         <th>Image</th>
         
         <th>Price</th>
-        <th>Documents</th>
-         <th>Description</th>
+         <th>Documents</th>
+        <th>Description</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -32,7 +32,6 @@
       No Image
     {% endif %}
   {% endwith %}</td>
-
         <td>{{ i.price }}</td>
 
          <td> {% with i.documentss.first as doc %}
@@ -45,7 +44,7 @@
         <td>{{ i.description }}</td>
         <td class="px-0">
           
-          <a href="{% url 'core:regaccept' i.id %}">
+          <a href="#">
             <button class="btn btn-danger btn-sm">Assign</button></a>
         </td>
       </tr>

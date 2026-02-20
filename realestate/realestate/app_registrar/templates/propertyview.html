@@ -13,8 +13,7 @@
         <th>Image</th>
         
         <th>Price</th>
-        <th>Documents</th>
-         <th>Description</th>
+        <th>Description</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -32,16 +31,7 @@
       No Image
     {% endif %}
   {% endwith %}</td>
-
         <td>{{ i.price }}</td>
-
-         <td> {% with i.documentss.first as doc %}
-    {% if doc and doc.doc %}
-      <img src="{{ doc.doc.url }}" alt="{{ i.name }}" width="100">
-    {% else %}
-      No Documents
-    {% endif %}
-  {% endwith %}</td>
         <td>{{ i.description }}</td>
         <td class="px-0">
           

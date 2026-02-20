@@ -217,7 +217,9 @@ def reset(request):
             return HttpResponse("<script>alert('Password do not match');window.location='/login/';</script>") 
     return render(request, "reset.html", {"msg": msg})
 
-   
+def propertyview(request):
+    adminviewproperty=Property.objects.filter(registrar=request.user)
+    return render(request,"propertyview.html",{"adminviewproperty":adminviewproperty})
 
-  
+
 

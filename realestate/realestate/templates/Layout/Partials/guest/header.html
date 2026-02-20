@@ -56,22 +56,9 @@
               <li class="active"><a href="index.html">Home</a></li>
               
                 <li><a href="{% url 'dashboard:login' %}">Login</a></li>
-              <li class="has-children">
-                <a href="properties.html">Register</a>
-                <ul class="dropdown">
-                  <li><a href="{% url 'dashboard:buyerreg' %}">Buyer Registration</a></li>
-                  
-                  <li><a href="{% url 'dashboard:sellerreg' %}">Seller Registration</a></li>
-                  <!-- <li class="has-children">
-                    <a href="#">Dropdown</a>
-                    <ul class="dropdown">
-                      <li><a href="#">Sub Menu One</a></li>
-                      <li><a href="#">Sub Menu Two</a></li>
-                      <li><a href="#">Sub Menu Three</a></li>
-                    </ul>
-                  </li> -->
-                </ul>
-              </li>
+                <li><a href="{% url 'dashboard:register' %}">Register</a></li>
+
+            
               <!-- <li><a href="services.html">Services</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="contact.html">Contact Us</a></li> -->

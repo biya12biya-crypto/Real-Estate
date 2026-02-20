@@ -58,7 +58,10 @@
                 
                 <li><a href="{% url 'seller:enquiryview' %}" class="nav-link">View Enquiries</a></li>
                  <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                 <li><a href="{% url 'dashboard:logout' %}" class="nav-link">Logout</a></li>
+                {% if request.user.role == 'both' %}
+                <li><a href="{% url 'dashboard:buyerdashboard' %}" class="nav-link">Buyer Dashboard</a></li>
+                {% endif %}
+                <li><a href="{% url 'dashboard:logout' %}" class="nav-link">Logout</a></li>
                
                
               </ul>

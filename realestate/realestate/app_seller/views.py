@@ -27,7 +27,12 @@ def propertyreg(request):
                 property=p,
                 img=img
             )
-
+        documents = request.FILES.getlist('doc')
+        for doc in documents:
+            PropertyImage.objects.create(
+                property=p,
+                doc=doc
+            )
         return HttpResponse("<script>alert('Property added successfully');window.location='/sellerdashboard/';</script>") 
     cat =Category.objects.all()
     return render(request, "propertyreg.html", {"list": cat})
@@ -64,6 +69,5 @@ def deleteenqv(request,id):
 @never_cache
 @login_required(login_url='/login/')
 def enqaccept(request):
-    
-        return HttpResponse("<script>alert('Enquiry Approved Successfully');window.location='/seller/enquiryview/';</script>")
+    return HttpResponse("<script>alert('Enquiry Approved Successfully');window.location='/seller/enquiryview/';</script>")
     

@@ -86,7 +86,7 @@ LOCAL_APPS = [
     "realestate.app_core",
     "realestate.app_seller",
     "realestate.app_buyer",
-
+    "realestate.app_registrar",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -11,6 +11,7 @@ urlpatterns = [
     path("core/", include("realestate.app_core.urls",namespace="core")),
     path("seller/", include("realestate.app_seller.urls",namespace="seller")),
     path("buyer/", include("realestate.app_buyer.urls",namespace="buyer")),
+    path("registrar/", include("realestate.app_registrar.urls",namespace="registrar")),
 
     path("home", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(

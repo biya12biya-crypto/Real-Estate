@@ -55,11 +55,13 @@
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="{% url 'dashboard:buyerdashboard' %}" class="nav-link">Home</a></li>
-                <li><a href="{% url 'buyer:viewcategory' %}" class="nav-link">View Categories</a></li>
+                <li><a href="{% url 'buyer:viewcategory' %}" class="nav-link"> Categories</a></li>
                 <li><a href="{% url 'buyer:modalview' %}" class="nav-link">Seller's Replays </a></li>
-                <li><a href="{% url 'buyer:favorite' %}" class="nav-link">My Favorites</a></li> 
-                <li><a href="{% url 'buyer:enquiry' %}" class="nav-link">My Enquiries</a></li>
-  
+                 <li><a href="{% url 'buyer:favorite' %}" class="nav-link">Favorites</a></li> 
+                <li><a href="{% url 'buyer:enquiry' %}" class="nav-link">Enquiries</a></li>
+                {% if request.user.role == 'both' %}
+                <li><a href="{% url 'dashboard:sellerdashboard' %}" class="nav-link">Seller Dashboard</a></li>
+                {% endif %}
                 <li><a href="{% url 'dashboard:logout' %}" class="nav-link">Logout</a></li>
               </ul>
             </nav>
