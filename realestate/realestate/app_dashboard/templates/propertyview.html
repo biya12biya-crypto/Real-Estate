@@ -23,7 +23,7 @@
       <tr>
         <td>{{ forloop.counter }}</td>
         <!-- <td>{{ seller.name }}</td> -->
-        <td>{{ i.name }}, {{ i.location_url }}, {{ i.status }}</td>
+        <td>{{ i.name }}, {{ i.location_url }}, {{ i.registrar_status }}</td>
         <td>{{ i.type.name }}</td>
         <td> {% with i.images.first as img %}
     {% if img and img.img %}
@@ -44,9 +44,14 @@
         <td>{{ i.description }}</td>
         <td class="px-0">
           
-          <a href="#">
-            <button class="btn btn-danger btn-sm">Assign</button></a>
+          <a href="{% url 'dashboard:approveproperty' i.id %}">
+            <button class="btn btn-success btn-sm">Approve</button></a>
         </td>
+         <td class="px-0">
+         <a href="{% url 'dashboard:rejectproperty' i.id %}">
+            <button class="btn btn-danger btn-sm">Reject</button></a>
+        </td>
+
       </tr>
 
       {% empty %}

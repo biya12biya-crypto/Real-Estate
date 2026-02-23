@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .summary {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 16px;
+        }
+
+        .summary-row strong {
+            color: #333;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .btn-confirm:hover {
+            background: #1e7e34;
+        }
+
+        .btn-cancel {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .btn-cancel:hover {
+            background: #b52a37;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Confirm Your Payment</h1>
+
+        <div class="summary">
+            <div class="summary-row">
+                <span><strong>Selected Plan:</strong></span>
+                <span>{{ plan_name }}</span>
+            </div>
+
+            <div class="summary-row">
+                <span><strong>Duration:</strong></span>
+                <span>{{ plan_duration }}</span>
+            </div>
+
+            <div class="summary-row">
+                <span><strong>Amount:</strong></span>
+                <span>₹{{ amount }}</span>
+            </div>
+
+            <hr>
+
+            <div class="summary-row total">
+                <span>Total Payable</span>
+                <span>₹{{ amount }}</span>
+            </div>
+        </div>
+
+
+        <div class="buttons">
+            <form method="post" action="{% url 'seller:payment2' plan %}">
+                {% csrf_token %}
+                <div class="summary">
+                    <div class="summary-row">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <label for="">Account Holder Name</label>
+                                <input type="text" name="name" id="" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
+
+                                <label for="">Account Number</label>
+                                <input type="text" name="number" id="" class="form-control" maxlength="16" required>
+                            </div>
+                            <div class="col-md-6">
+
+                                <label for="">Expiry Date</label>
+                                <input type="text" name="exp" id="" placeholder="MM/YYYY" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+
+                                <label for="">CVV</label>
+                                <input type="password" name="cvv" maxlength="3" id="" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-confirm">
+                    Confirm & Pay
+                </button>
+                <a href="{% url 'seller:payment1' %}" class="btn btn-cancel">
+                    Cancel
+                </a>
+            </form>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -36,6 +36,9 @@ def log (request):
             if user.role=="admin":
                 login(request,user)
                 return HttpResponse("<script>alert('Login Successfully');window.location='/admin/';</script>")
+            elif user.role=="registrar":
+                login(request,user)
+                return HttpResponse("<script>alert('Login Successfully');window.location='/propertyview/';</script>")
             elif user.role=="seller":
                 login(request,user)
                 return HttpResponse("<script>alert('Login Successfully');window.location='/sellerdashboard/';</script>")
@@ -218,8 +221,32 @@ def reset(request):
     return render(request, "reset.html", {"msg": msg})
 
 def propertyview(request):
-    adminviewproperty=Property.objects.filter(registrar=request.user)
-    return render(request,"propertyview.html",{"adminviewproperty":adminviewproperty})
+    # Debug: Check all properties and their registrar_status
+    all_properties = Property.objects.all()
+    print("All properties and their registrar_status:")
+    for prop in all_properties:
+        print(f"  {prop.name}: {prop.registrar_status}")
+    
+    adminviewproperty = Property.objects.filter(registrar_status="assigned")
+    print(f"Found {adminviewproperty.count()} properties with registrar_status='assigned'")
+    
+    return render(
+        request,
+        "propertyview.html",
+        {"adminviewproperty": adminviewproperty}
+    )
+def approveproperty(request, id):
+    prop = Property.objects.get(id=id)
+    prop.registrar_status = 'approved'
+    prop.save(update_fields=['registrar_status'])
+    return redirect("dashboard:propertyview")
+
+def rejectproperty(request, id):
+    prop = Property.objects.get(id=id)
+    prop.registrar_status = "rejected"
+    prop.save(update_fields=['registrar_status'])
+    return redirect("dashboard:propertyview")
+
 
 
 

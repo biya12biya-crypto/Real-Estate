@@ -1,10 +1,13 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
-from app_core.models import Category, Property, PropertyImage
+from app_core.models import Category, Property, PropertyImage,payment
 from app_buyer.models import Enquiry
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+from datetime import date
+from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 # Create your views here.
 @never_cache
 @login_required(login_url='/login/')
@@ -35,6 +38,14 @@ def propertyreg(request):
             )
         return HttpResponse("<script>alert('Property added successfully');window.location='/sellerdashboard/';</script>") 
     cat =Category.objects.all()
+    pay = payment.objects.filter(user=request.user).order_by('-id').first()
+
+    today = timezone.now().date()
+
+    # ❌ No payment OR plan expired → redirect to payment page
+    if not pay or today > pay.expiry_date:
+        return redirect('seller:payment1')
+
     return render(request, "propertyreg.html", {"list": cat})
 
     return render(request, 'propertyreg.html')
@@ -71,3 +82,78 @@ def deleteenqv(request,id):
 def enqaccept(request):
     return HttpResponse("<script>alert('Enquiry Approved Successfully');window.location='/seller/enquiryview/';</script>")
     
+
+@never_cache
+@login_required(login_url='/login/')
+def payment1(request):
+    return render(request, "payment1.html")
+    
+ 
+@never_cache
+@login_required(login_url='/login/')
+def payment2(request, plan):
+    plans = {
+        3: {
+            "name": "Basic Plan",
+            "duration": "3 Months",
+            "amount": 999
+        },
+        6: {
+            "name": "Standard Plan",
+            "duration": "6 Months",
+            "amount": 1799
+        },
+        12: {
+            "name": "Premium Plan",
+            "duration": "1 Year",
+            "amount": 2999
+        }
+    }
+
+    selected_plan = plans.get(plan)
+
+    if not selected_plan:
+         return redirect('seller:payment1')
+
+    if not plan:
+        return redirect('seller:payment1')
+
+     
+    # If Confirm & Pay button is clicked
+    if request.method == "POST":
+        today = date.today()
+        if plan==3:
+            amount=999
+            duration="3 Month"
+            exp=today + relativedelta(months=3)
+        elif plan==6:
+            amount=1799
+            duration="6 Month"
+            exp=today + relativedelta(months=6)
+        elif plan==12:
+            amount=2999
+            duration="12 Month"
+            exp=today + relativedelta(months=12)
+        else:
+            return HttpResponse("<script>alert('Invalid choice');window.location='/seller/payment1'")
+        pay=payment()
+        pay.expiry_date=exp
+        pay.duration=duration
+        pay.amount=amount
+        pay.user=request.user
+        pay.save()
+        # here you will integrate payment gateway later
+        # For now, assume payment is successful
+        return redirect('seller:propertyreg')
+        
+    context = {
+        'plan_name': selected_plan['name'],
+        'plan_duration': selected_plan['duration'],
+        'amount': selected_plan['amount'],
+        'plan':plan
+    }
+
+    return render(request, 'payment2.html', context)   
+
+
+

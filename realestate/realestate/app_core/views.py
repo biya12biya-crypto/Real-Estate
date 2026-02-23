@@ -167,7 +167,7 @@ def buyerregview(request):
 @never_cache
 @login_required(login_url='/login/')
 def adminviewproperty(request):
-       adminv =Property.objects.filter(approval_status="requested")
+       adminv =Property.objects.all()
        return render(request, "adminviewproperty.html", {"adminviewproperty": adminv})
 
 
@@ -185,6 +185,7 @@ def proreject(request,name):
 def proaccept(request,name):
     a =Property.objects.get(id =name)
     a.approval_status="accepted"
+    a.save()
     return HttpResponse("<script>alert('Property Accepted Successfully');window.location='/core/adminviewproperty/';</script>")
 
 def registrarreg(request):
@@ -205,20 +206,40 @@ def registrarreg(request):
     registrarreg=User.objects.filter(role="registrar")
     return render(request,"registrarreg.html",{"registrarreg":registrarreg})
 
-# def regaccept(request,id):
-#     a =Property.objects.get(id =id)
-#     user=User.objects.get(role="registrar")
-#     a.registrar=user
-#     a.save()
-#     return HttpResponse("<script>alert('Property assigned to registrar');window.location='/core/adminviewproperty/';</script>")
+def registrarlogin(request):
+    return render(request,"login.html")
+def registratlogin(request):
+    if request.method == 'POST':
+        username = request.POST.get('user123')
+        password = request.POST.get('pass123')
+        user = User.objects.filter(role="registrar").first()
+        if user:
+            if user.check_password(password):
+                login(request, user)
+                return redirect('registrarhome')
+            else:
+                return HttpResponse("<script>alert('Invalid password');window.location='/core/registrarlogin/';</script>")
+        else:
+            return HttpResponse("<script>alert('Invalid email');window.location='/core/registrarlogin/';</script>")
 
 def regaccept(request, id):
     prop = Property.objects.get(id=id)
 
-    registrar_user = User.objects.get(role="registrar")  # only one registrar
+    # get a registrar (basic version)
+    registrar = User.objects.get(role="registrar")
 
-    prop.registrar = registrar_user
-    prop.approval_status = "accepted"
-    prop.save()
+    # assign registrar
+    prop.registrar = registrar
 
-    return redirect("core:adminviewproperty")
+    # update registrar status
+    prop.registrar_status = "assigned"
+
+    prop.save(update_fields=["registrar", "registrar_status"])
+
+    return HttpResponse(
+        "<script>"
+        "alert('Property assigned successfully');"
+        "window.location='/core/adminviewproperty/';"
+        "</script>"
+    )
+

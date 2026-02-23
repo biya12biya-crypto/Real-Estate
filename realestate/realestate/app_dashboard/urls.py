@@ -16,6 +16,8 @@ path("forget/",views.forget,name='forget'),
 path("reset/",views.reset,name='reset'),   
 path("verify_otp/",views.verify_otp,name='verify_otp'),    
 path("propertyview/", views.propertyview, name='propertyview'),
+path("approveproperty/<int:id>/", views.approveproperty, name='approveproperty'),
+path("rejectproperty/<int:id>/", views.rejectproperty, name='rejectproperty'),
 
 
 ]

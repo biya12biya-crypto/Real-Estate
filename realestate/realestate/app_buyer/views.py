@@ -9,7 +9,7 @@ from django.views.decorators.cache import never_cache
 @never_cache
 @login_required(login_url='/login/')
 def viewproperty(request,id):
-    c=Property.objects.filter(type=id)
+    c=Property.objects.filter(type=id,approval_status="accepted", registrar_status="approved")
     return render(request, 'viewproperty.html',{"propertyregview":c})
 
 @never_cache
@@ -87,6 +87,6 @@ def deletemodal(request,id):
     return HttpResponse("<script>alert('Removed Successfully');window.location='/buyer/modalview/';</script>")
 
 def listings(request):
-    propertyregview = Property.objects.all()
-    return render(request, 'buyer/listings.html', { 'propertyregview': propertyregview })
+    propertyregview = Property.objects.filter(approval_status="accepted")
+    return render(request, 'listings.html', { 'propertyregview': propertyregview })
 

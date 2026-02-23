@@ -25,4 +25,5 @@ urlpatterns = [
   
   path("registrarreg/",views.registrarreg,name='registrarreg'),
   path("regaccept/<int:id>",views.regaccept,name='regaccept'),
+  
     ]

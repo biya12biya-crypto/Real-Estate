@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Your Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .plans {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .plan-card {
+            background: #fff;
+            width: 300px;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .plan-card h2 {
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        .price {
+            font-size: 28px;
+            color: #28a745;
+            margin: 15px 0;
+        }
+
+        .duration {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Select a Plan to Add Your Property</h1>
+
+    <div class="plans">
+
+        <!-- 3 Month Plan -->
+        <div class="plan-card">
+            <h2>Basic Plan</h2>
+            <div class="price">₹999</div>
+            <div class="duration">3 Months</div>
+            
+            <a href="{% url 'seller:payment2' 3 %}" class="btn">Choose Plan</a>
+        </div>
+
+        <!-- 6 Month Plan -->
+        <div class="plan-card">
+            <h2>Standard Plan</h2>
+            <div class="price">₹1799</div>
+            <div class="duration">6 Months</div>
+            
+            <a href="{% url 'seller:payment2' 6 %}" class="btn">Choose Plan</a>
+        </div>
+
+        <!-- 1 Year Plan -->
+        <div class="plan-card">
+            <h2>Premium Plan</h2>
+            <div class="price">₹2999</div>
+            <div class="duration">1 Year</div>
+           
+            <a href="{% url 'seller:payment2' 12 %}" class="btn">Choose Plan</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
