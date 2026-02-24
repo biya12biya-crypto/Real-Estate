@@ -243,3 +243,8 @@ def regaccept(request, id):
         "</script>"
     )
 
+@never_cache
+@login_required(login_url='/login/')
+def adminviewpayment(request):
+       adminv =Property.objects.all()
+       return render(request, "adminviewpayment.html", {"adminviewpayment": adminv})

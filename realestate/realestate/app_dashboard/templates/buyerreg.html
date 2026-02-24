@@ -23,30 +23,40 @@
                 <!-- Username -->
                 <div class="mb-3">
                   <label class="form-label">Username</label>
-                  <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                     <input class="form-control" name="username" type="text" 
+placeholder="Enter Username" 
+                                    required minlength="8" title="Username must be at least 8 characters 
+long.">
                 </div>
                 <!-- name -->
                 <div class="mb-3">
                   <label class="form-label">Name</label>
-                  <input type="text" name="name" class="form-control" placeholder="Enter seller's name" required>
+                    <input class="form-control" name="name" type="text" 
+placeholder="Enter Name" required  pattern="^[A-Z][a-zA-Z\s]*$" 
+                                   title="Name must start with a capital letter and contain only letters.">
                 </div>
 
                 <!-- Email -->
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+                    <input class="form-control" name="email" type="email" 
+placeholder="Enter Email"required> 
                 </div>
 
                 <!-- Password -->
                 <div class="mb-3">
                   <label class="form-label">Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                 <input class="form-control" name="password" type="password" 
+placeholder="Enter Password"                                     required minlength="8" 
+title="Password must be at least 8 characters long."> 
                 </div>
 
                 <!-- Phone -->
                 <div class="mb-3">
                   <label class="form-label">Phone Number</label>
-                  <input type="text" name="contact" class="form-control" placeholder="Enter phone number" required>
+                   <input class="form-control" name="contact" type="text" 
+placeholder="Enter Contact"  required pattern="[0-9]{10}" title="Please enter a valid 10
+digit mobile number"> 
                 </div>
 
                 <!-- Address -->
