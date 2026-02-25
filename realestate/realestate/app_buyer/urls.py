@@ -13,7 +13,7 @@ urlpatterns = [
    path("modalview/",views.modalview,name='modalview'),
     path("deletemodal/<int:id>",views.deletemodal,name='deletemodal'),
  path("listings/",views.listings,name='listings'),
-
+ path("predict_house/",views.predict_house,name='predict_house'),
 
 
 

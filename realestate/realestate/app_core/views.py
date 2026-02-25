@@ -169,7 +169,7 @@ def buyerregview(request):
 def adminviewproperty(request):
        adminv =Property.objects.all()
        return render(request, "adminviewproperty.html", {"adminviewproperty": adminv})
-
+       
 
    
 
@@ -246,5 +246,33 @@ def regaccept(request, id):
 @never_cache
 @login_required(login_url='/login/')
 def adminviewpayment(request):
-       adminv =Property.objects.all()
-       return render(request, "adminviewpayment.html", {"adminviewpayment": adminv})
+       payment =Property.objects.all()
+       return render(request, "adminviewpayment.html", {"adminviewpayment": payment})
+
+
+def bestseller(request):
+    seller_data = (
+        Property.objects
+        .values('seller__seller_name')
+        .annotate(property_count=Count('id'))
+        .order_by('-property_count')
+    )
+
+    labels = [
+        item['seller__seller_name']
+        for item in seller_data
+        if item['seller__seller_name']
+    ]
+
+    data = [
+        item['property_count']
+        for item in seller_data
+        if item['seller__seller_name']
+    ]
+
+    context = {
+        'labels': labels,
+        'data': data,
+    }
+
+    return render(request, "bestseller.html", context)

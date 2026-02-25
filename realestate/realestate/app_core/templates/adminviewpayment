@@ -1,75 +1,38 @@
 {% load static %}
 {% include 'Layout/Partials/Admin/header.html' %}
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="container">
+  <div class="table-content">
+    <h1 class="text-primary fw-bold mb-4">Property Listings</h1>
 
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>Payment Details</h4>
-                </div>
+    <table class="table table-striped table-bordered">
+      <thead class="table-primary">
+        <tr>
+          <th>Number</th>
+          <th>Account Holder Name</th>
+          <th>Account No</th>
+          <th>Expiry Date</th>
+        </tr>
+      </thead>
 
-                <div class="card-body">
-                    <form method="post">
-                        {% csrf_token %}
-
-                        <!-- Account Holder Name -->
-                        <div class="mb-3">
-                            <label class="form-label">Account Holder Name</label>
-                            <input
-                                type="text"
-                                name="holder_name"
-                                class="form-control"
-                                placeholder="Enter account holder name"
-                                required
-                            >
-                        </div>
-
-                        <!-- Account Number -->
-                        <div class="mb-3">
-                            <label class="form-label">Account Number</label>
-                            <input
-                                type="text"
-                                name="account_number"
-                                class="form-control"
-                                placeholder="16-digit account number"
-                                maxlength="16"
-                                pattern="[0-9]{16}"
-                                required
-                            >
-                            <small class="text-muted">
-                                Account number must be exactly 16 digits
-                            </small>
-                        </div>
-
-                        <!-- Expiry Date -->
-                        <div class="mb-4">
-                            <label class="form-label">Expiry Date</label>
-                            <input
-                                type="month"
-                                name="expiry_date"
-                                class="form-control"
-                                required
-                            >
-                        </div>
-
-                        <!-- Buttons -->
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success me-2">
-                                Confirm Payment
-                            </button>
-                            <a href="javascript:history.back()" class="btn btn-secondary">
-                                Cancel
-                            </a>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </div>
+      <tbody>
+        {% for payment in adminviewpayment %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ payment.name }}</td>
+          <td>{{ payment.number }}</td>
+          <td>{{ payment.expiry_date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-center">
+            No sellers registered yet.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 {% include 'Layout/Partials/Admin/footer.html' %}

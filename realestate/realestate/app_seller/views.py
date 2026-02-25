@@ -136,6 +136,13 @@ def payment2(request, plan):
             exp=today + relativedelta(months=12)
         else:
             return HttpResponse("<script>alert('Invalid choice');window.location='/seller/payment1'")
+        if payment.objects.filter(user=request.user).exists():
+            p=payment.objects.get(user=request.user)
+            p.expiry_date=exp
+            p.duration=duration
+            p.amount=amount
+            p.payment_date=today
+            p.save()
         pay=payment()
         pay.expiry_date=exp
         pay.duration=duration

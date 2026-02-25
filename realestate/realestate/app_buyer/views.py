@@ -5,6 +5,18 @@ from app_core.models import Property,Category, PropertyImage
 from app_buyer.models import Enquiry, Favorite
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+
+import joblib
+import pandas as pd
+from django.shortcuts import render
+import os
+from django.conf import settings
+# Load trained pipeline
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+model_path = os.path.join(BASE_DIR, "Houseprice.pkl")
+model = joblib.load(model_path)
+
+
 # Create your views here.
 @never_cache
 @login_required(login_url='/login/')
@@ -90,3 +102,106 @@ def listings(request):
     propertyregview = Property.objects.filter(approval_status="accepted")
     return render(request, 'listings.html', { 'propertyregview': propertyregview })
 
+
+
+# def priceprediction(request):
+#     predicted_price = None
+
+#     if request.method == "POST":
+#         # Basic fields
+#         property_type = request.POST.get("property_type")
+#         size_sqft = int(request.POST.get("size_sqft", 0))
+#         bhk = int(request.POST.get("bhk", 0))
+#         floor_no = request.POST.get("floor_no")
+#         total_floors = request.POST.get("total_floors")
+#         property_age = int(request.POST.get("property_age", 0))
+
+#         furnished = request.POST.get("furnished")
+#         owner_type = request.POST.get("owner_type")
+#         facing = request.POST.get("facing")
+#         availability = request.POST.get("availability")
+
+#         public_transport = request.POST.get("public_transport")
+#         parking = request.POST.get("parking")
+#         security = request.POST.get("security")
+
+#         state = request.POST.get("state")
+#         city = request.POST.get("city")
+#         no_of_sh= int(request.POST.get("no_of_sh", 0))
+        
+
+#         # Checkbox fields (True / False)
+#         garden = True if request.POST.get("garden") else False
+#         playground = True if request.POST.get("playground") else False
+#         clubhouse = True if request.POST.get("clubhouse") else False
+#         gym = True if request.POST.get("gym") else False
+#         pool = True if request.POST.get("pool") else False
+#     return render(request, "priceprediction.html", {"predicted_price": predicted_price})
+
+
+
+def predict_house(request):
+    prediction = None
+    if request.method == 'POST':
+        property_type = request.POST.get("property_type")
+        size_sqft = int(request.POST.get("size_sqft", 0))
+        bhk = int(request.POST.get("bhk", 0))
+        floor_no = request.POST.get("floor_no",0)
+        total_floors = request.POST.get("total_floors",0)
+        property_age = int(request.POST.get("property_age", 0))
+
+        furnished = request.POST.get("furnished")
+        owner_type = request.POST.get("owner_type")
+        facing = request.POST.get("facing")
+        availability = request.POST.get("availability")
+
+        public_transport = request.POST.get("public_transport")
+        parking = request.POST.get("parking")
+        security = request.POST.get("security")
+
+        state_city = request.POST.get("state_city")
+       
+        no_of_sh= int(request.POST.get("no_of_sh", 0))
+        
+
+        # Checkbox fields (True / False)
+        garden = True if request.POST.get("garden") else False
+        playground = True if request.POST.get("playground") else False
+        clubhouse = True if request.POST.get("clubhouse") else False
+        gym = True if request.POST.get("gym") else False
+        pool = True if request.POST.get("pool") else False
+            # Prepare data for ML
+        input_data = pd.DataFrame([{
+                'Property_Type': property_type,
+                'BHK': bhk,
+                'Size_in_SqFt': size_sqft,
+                'Furnished_Status': furnished,
+                'Floor_No': floor_no,
+                'Total_Floors': total_floors,
+                'Age_of_Property': property_age,
+                'School_and_Hospitals': 
+                no_of_sh,
+                'Public_Transport_Accessibility':        public_transport,
+                'Parking_Space':  parking,
+                'Security': security,
+                'Facing': facing,
+                'Owner_Type': owner_type,
+                'Availability_Status': availability,
+                'State_City': state_city,
+                'clubhouse': int(clubhouse),
+                'garden': int(garden),
+                'gym': int(gym),
+                'playground': int(playground),
+                'pool': int(pool),
+                 }])
+            # Prediction
+        prediction = model.predict(input_data)[0]
+            # Save prediction
+        predicted_price = prediction
+        return render(request, 'predict_house.html', { 'predicted_price': predicted_price})
+
+        
+    else:
+        predicted_price=0
+       
+        return render(request, 'predict_house.html', { 'predicted_price': predicted_price})

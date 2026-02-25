@@ -1,76 +1,102 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Stated &mdash; Website by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900|Playfair+Display:400,700,900 " rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'seller/fonts/icomoon/style.css' %}">
+<head>
+  <title>KeralaNest</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="{% static 'seller/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'seller/css/jquery-ui.css' %}">
-    <link rel="stylesheet" href="{% static 'seller/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'seller/css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'seller/css/owl.theme.default.min.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900|Playfair+Display:400,700,900" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'seller/css/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'seller/fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'seller/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'seller/css/style.css' %}">
+</head>
 
-    <link rel="stylesheet" href="{% static 'seller/css/bootstrap-datepicker.css' %}">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-    <link rel="stylesheet" href="{% static 'seller/fonts/flaticon/font/flaticon.css' %}">
+<div class="site-wrap">
 
-    <link rel="stylesheet" href="{% static 'seller/css/aos.css' %}">
-
-    <link rel="stylesheet" href="{% static 'seller/css/style.css' %}">
-    
-  </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-  
-  <div class="site-wrap">
-
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
+  <!-- Mobile Menu -->
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
       </div>
-      <div class="site-mobile-menu-body"></div>
     </div>
-   
-    
-        <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner" style="background-color: #525c6685;">
+    <div class="site-mobile-menu-body"></div>
+  </div>
 
+  <!-- Header -->
+  <header class="site-navbar py-4 js-sticky-header site-navbar-target"
+          role="banner"
+          style="background-color: #525c6685;">
 
-      <div class="container">
-        <div class="row align-items-center">
-          
-           <div class="col-6 col-xl-2">
-            <h1 class="mb-0 site-logo m-0 p-0" style="text-transform: capitalize;"><a href="index.html" class="mb-0">KeralaNest</a></h1>
-          </div>
+    <div class="container">
+      <div class="row align-items-center">
 
-          <div class="col-12 col-md-10 d-none d-xl-block">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-
-              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="{% url 'dashboard:buyerdashboard' %}" class="nav-link">Home</a></li>
-                <li><a href="{% url 'buyer:viewcategory' %}" class="nav-link"> Categories</a></li>
-                <li><a href="{% url 'buyer:modalview' %}" class="nav-link">Seller's Replays </a></li>
-                 <li><a href="{% url 'buyer:favorite' %}" class="nav-link">Favorites</a></li> 
-                <li><a href="{% url 'buyer:enquiry' %}" class="nav-link">Enquiries</a></li>
-                {% if request.user.role == 'both' %}
-                <li><a href="{% url 'dashboard:sellerdashboard' %}" class="nav-link">Seller Dashboard</a></li>
-                {% endif %}
-                <li><a href="{% url 'dashboard:logout' %}" class="nav-link">Logout</a></li>
-              </ul>
-            </nav>
-          </div>
-
-
-          <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a></div>
-
+        <!-- Logo -->
+        <div class="col-6 col-xl-2">
+          <h1 class="mb-0 site-logo m-0 p-0" style="text-transform: capitalize;">
+            <a href="#" class="mb-0 text-white">KeralaNest</a>
+          </h1>
         </div>
+
+        <!-- Desktop Menu -->
+        <div class="col-12 col-md-10 d-none d-xl-block">
+          <nav class="site-navigation position-relative text-right" role="navigation">
+            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-flex align-items-center">
+
+              <li class="ml-3">
+                <a href="{% url 'dashboard:buyerdashboard' %}" class="nav-link">Home</a>
+              </li>
+
+              <li class="ml-3">
+                <a href="{% url 'buyer:viewcategory' %}" class="nav-link">Categories</a>
+              </li>
+
+              <li class="ml-3">
+                <a href="{% url 'buyer:modalview' %}" class="nav-link">Seller's Replies</a>
+              </li>
+
+              <li class="ml-3">
+                <a href="{% url 'buyer:predict_house' %}" class="nav-link">Price Prediction</a>
+              </li>
+
+              <li class="ml-3">
+                <a href="{% url 'buyer:favorite' %}" class="nav-link">Favorites</a>
+              </li>
+
+              <li class="ml-3">
+                <a href="{% url 'buyer:enquiry' %}" class="nav-link">Enquiries</a>
+              </li>
+
+              {% if request.user.role == 'both' %}
+              <li class="ml-3">
+                <a href="{% url 'dashboard:sellerdashboard' %}" class="nav-link">Seller Dashboard</a>
+              </li>
+              {% endif %}
+
+              <li class="ml-3">
+                <a href="{% url 'dashboard:logout' %}" class="nav-link text-danger">Logout</a>
+              </li>
+
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3">
+          <a href="#" class="site-menu-toggle js-menu-toggle text-black float-right">
+            <span class="icon-menu h3"></span>
+          </a>
+        </div>
+
       </div>
-      
-    </header>
+    </div>
+  </header>
+
+</div>
+
+</body>
+</html>
