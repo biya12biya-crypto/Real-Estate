@@ -40,14 +40,35 @@
         <td>{{ i.price }}</td>
 
         <td>{{ i.description }}</td>
-        
+<!--         
          <td> {% with i.documents.first as doc %}
     {% if doc and doc.doc %}
       <img src="{{ doc.doc.url }}" alt="{{ i.name }}" width="100">
     {% else %}
       No Documents
     {% endif %}
-  {% endwith %}</td>
+  {% endwith %}</td> -->
+
+
+
+<td>
+  {% with i.documents.first as doc %}
+    {% if doc and doc.doc %}
+      <a href="{{ doc.doc.url }}" target="_blank" class="btn btn-primary btn-sm">
+        View Document
+      </a>
+    {% else %}
+      No Documents
+    {% endif %}
+  {% endwith %}
+</td>
+
+
+
+
+
+
+
 
 
         <td>{{ i.registrar_status }}</td>

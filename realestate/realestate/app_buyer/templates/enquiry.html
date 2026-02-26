@@ -17,6 +17,7 @@
         <th>Price</th>
         <th>Description</th>
         <th>Status</th>
+        <th>Location</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -42,6 +43,7 @@
         <td>{{ i.property.price }}</td>
         <td>{{ i.property.description }}</td>
         <td>{{ i.status }}</td>
+        <td><a href="{{i.location_url}}" target="_blank">View location</a></td>
         <td>
             {% if i.status == "rejected" %}
          <p>Cancellation not Available</p> {% elif i.status == "cancelled" %} <p>Cancelled</p>{% else %}

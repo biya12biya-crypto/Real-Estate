@@ -13,8 +13,9 @@
           </div>
         </div>
 
-        <div class="owl-carousel nonloop-block-13 mb-5">
+        <div class="row">
         {% for i in propertyregview %}
+        <div class="col-md-4">
           <div class="property">
             <a href="{% url 'buyer:aboutview' i.id %}">
               {% with i.images.first as img %}
@@ -32,7 +33,9 @@
               <div><strong class="price">{{ i.price }}</strong></div>
             </div>
           </div>
+          </div>
           {% endfor %}
+      
         </div>
         <div class="row justify-content-center">
           <div class="col-md-4">

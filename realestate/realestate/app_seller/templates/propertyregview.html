@@ -12,6 +12,7 @@
         <th>Location</th>
         <th>Property Type</th>
         <th>Image</th>
+        <th>Documents</th>
          <th>Status</th>
         <th>Price</th>
         <th>Description</th>
@@ -34,7 +35,15 @@
     {% endif %}
   {% endwith %}
 </td>
-
+   <td>
+  {% with i.documents.first as doc %}
+    {% if doc and doc.doc %}
+      <img src="{{ doc.doc.url }}" alt="{{ i.name }}" width="100">
+    {% else %}
+      No Documents
+    {% endif %}
+  {% endwith %}
+</td>
         <td>{{ i.status }}</td>
         <td>{{ i.price }}</td>
         <td>{{ i.description }}</td>

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from app_core.models import Category, Property, PropertyImage,payment
+from app_core.models import Category, Property, PropertyImage,payment,Document
 from app_buyer.models import Enquiry
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
@@ -32,7 +32,7 @@ def propertyreg(request):
             )
         documents = request.FILES.getlist('doc')
         for doc in documents:
-            PropertyImage.objects.create(
+            Document.objects.create(
                 property=p,
                 doc=doc
             )
@@ -163,4 +163,32 @@ def payment2(request, plan):
     return render(request, 'payment2.html', context)   
 
 
-
+@never_cache
+@login_required(login_url='/login/')
+def propertyedit(request,id):
+    up = Property.objects.get(id=id)
+    if request.method=="POST":
+        name=request.POST.get('name')
+        location_url=request.POST.get('location_url')
+        type=request.POST.get('type')
+        status=request.POST.get('status')
+        price=request.POST.get('price')   
+        description=request.POST.get('description')
+        if Property.objects.filter(name=name,location_url=location_url).exists():
+            return HttpResponse("<script>alert('This Property already Exists');window.location='/seller/propertyreg/';</script>") 
+        p=Property(name=name,location_url=location_url,type=Category.objects.get(id=type),status=status,price=price,description=description,user=request.user)
+        p.type=Category.objects.get(id = type)
+        p.save()
+        images = request.FILES.getlist('img')
+        for img in images:
+            PropertyImage.objects.create(
+                property=p,
+                img=img
+            )
+        documents = request.FILES.getlist('doc')
+        for doc in documents:
+            Document.objects.create(
+                property=p,
+                doc=doc
+            )
+    return HttpResponse("<script>alert('Property Edited successfully');window.location='/sellerdashboard/';</script>") 
