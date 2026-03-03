@@ -10,7 +10,7 @@
         <tr>
           <th>Number</th>
           <th>Account Holder Name</th>
-          <th>Account No</th>
+          <th>Amount</th>
           <th>Expiry Date</th>
         </tr>
       </thead>
@@ -19,8 +19,8 @@
         {% for payment in adminviewpayment %}
         <tr>
           <td>{{ forloop.counter }}</td>
-          <td>{{ payment.name }}</td>
-          <td>{{ payment.number }}</td>
+          <td>{{ payment.user.name }}</td>
+          <td>{{ payment.amount }}</td>
           <td>{{ payment.expiry_date }}</td>
         </tr>
         {% empty %}

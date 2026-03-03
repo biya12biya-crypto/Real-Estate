@@ -70,7 +70,7 @@
 <div class="form-container">
      <h1 class="text-primary fw-bold mb-4">Edit Property</h1>
 
-    <form method="post" enctype="multipart/form-data"  action="{% url 'seller:propertyedit' propertyregview.id %}">
+    <form method="post" enctype="multipart/form-data"  action="{% url 'seller:propertyedit' propertyedit.id %}">
 			{% csrf_token %}>
        
          <div class="row">

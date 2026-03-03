@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from app_core.models import Buyer, Category, District, Location, Property, Seller
+from app_core.models import Buyer, Category, District, Location, Property, Seller, payment
 from realestate.users.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
@@ -246,8 +246,8 @@ def regaccept(request, id):
 @never_cache
 @login_required(login_url='/login/')
 def adminviewpayment(request):
-       payment =Property.objects.all()
-       return render(request, "adminviewpayment.html", {"adminviewpayment": payment})
+       payments =payment.objects.all()
+       return render(request, "adminviewpayment.html", {"adminviewpayment": payments})
 
 
 def bestseller(request):
