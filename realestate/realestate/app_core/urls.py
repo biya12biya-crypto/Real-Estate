@@ -26,5 +26,5 @@ urlpatterns = [
   path("registrarreg/",views.registrarreg,name='registrarreg'),
   path("regaccept/<int:id>",views.regaccept,name='regaccept'),
   path("adminviewpayment/",views.adminviewpayment,name='adminviewpayment'),
-   path("bestseller/",views.bestseller,name='bestseller'),
+   path("bestpro/",views.bestpro,name='bestpro'),
     ]

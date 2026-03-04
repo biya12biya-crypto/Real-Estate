@@ -6,6 +6,8 @@ from realestate.users.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.core.mail import send_mail
+from django.db.models import Count
+
 
 # Create your views here.
 @never_cache
@@ -250,29 +252,23 @@ def adminviewpayment(request):
        return render(request, "adminviewpayment.html", {"adminviewpayment": payments})
 
 
-def bestseller(request):
-    seller_data = (
+def bestpro(request):
+
+    property_data = (
         Property.objects
-        .values('seller__seller_name')
-        .annotate(property_count=Count('id'))
-        .order_by('-property_count')
+        .annotate(total_enquiry=Count('property_enquiry'))
+        .order_by('-total_enquiry')
     )
 
-    labels = [
-        item['seller__seller_name']
-        for item in seller_data
-        if item['seller__seller_name']
-    ]
+    labels = []
+    data = []
 
-    data = [
-        item['property_count']
-        for item in seller_data
-        if item['seller__seller_name']
-    ]
+    for prop in property_data:
+        if prop.total_enquiry > 0:
+            labels.append(prop.name)
+            data.append(prop.total_enquiry)
 
-    context = {
+    return render(request, 'bestpro.html', {
         'labels': labels,
         'data': data,
-    }
-
-    return render(request, "bestseller.html", context)
+    })
