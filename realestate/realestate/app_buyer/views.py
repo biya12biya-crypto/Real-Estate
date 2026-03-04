@@ -13,8 +13,9 @@ import os
 from django.conf import settings
 # Load trained pipeline
 BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-model_path = os.path.join(BASE_DIR, "Houseprice.pkl")
-model = joblib.load(model_path)
+model_path = os.path.join(BASE_DIR, "house_price_xgb_model.pkl")
+model = joblib.load(model_path, "rb")
+
 
 
 # Create your views here.
@@ -128,7 +129,7 @@ def listings(request):
 #         state = request.POST.get("state")
 #         city = request.POST.get("city")
 #         no_of_sh= int(request.POST.get("no_of_sh", 0))
-        
+
 
 #         # Checkbox fields (True / False)
 #         garden = True if request.POST.get("garden") else False
@@ -140,68 +141,41 @@ def listings(request):
 
 
 
-def predict_house(request):
+
+
+def predict_price(request):
     prediction = None
-    if request.method == 'POST':
-        property_type = request.POST.get("property_type")
-        size_sqft = int(request.POST.get("size_sqft", 0))
-        bhk = int(request.POST.get("bhk", 0))
-        floor_no = request.POST.get("floor_no",0)
-        total_floors = request.POST.get("total_floors",0)
-        property_age = int(request.POST.get("property_age", 0))
 
-        furnished = request.POST.get("furnished")
-        owner_type = request.POST.get("owner_type")
-        facing = request.POST.get("facing")
-        availability = request.POST.get("availability")
 
-        public_transport = request.POST.get("public_transport")
-        parking = request.POST.get("parking")
-        security = request.POST.get("security")
+    if request.method == "POST":
+        try:
+            rera = int(request.POST.get("RERA", 0))  # Boolean (0/1)
+            bhk_no = int(request.POST.get("BHK_NO"))
+            square_ft = float(request.POST.get("SQUARE_FT"))
+            ready_to_move = int(request.POST.get("READY_TO_MOVE", 0))
+            resale = int(request.POST.get("RESALE", 0))
 
-        state_city = request.POST.get("state_city")
-       
-        no_of_sh= int(request.POST.get("no_of_sh", 0))
-        
 
-        # Checkbox fields (True / False)
-        garden = True if request.POST.get("garden") else False
-        playground = True if request.POST.get("playground") else False
-        clubhouse = True if request.POST.get("clubhouse") else False
-        gym = True if request.POST.get("gym") else False
-        pool = True if request.POST.get("pool") else False
-            # Prepare data for ML
-        input_data = pd.DataFrame([{
-                'Property_Type': property_type,
-                'BHK': bhk,
-                'Size_in_SqFt': size_sqft,
-                'Furnished_Status': furnished,
-                'Floor_No': floor_no,
-                'Total_Floors': total_floors,
-                'Age_of_Property': property_age,
-                'School_and_Hospitals': 
-                no_of_sh,
-                'Public_Transport_Accessibility':        public_transport,
-                'Parking_Space':  parking,
-                'Security': security,
-                'Facing': facing,
-                'Owner_Type': owner_type,
-                'Availability_Status': availability,
-                'State_City': state_city,
-                'clubhouse': int(clubhouse),
-                'garden': int(garden),
-                'gym': int(gym),
-                'playground': int(playground),
-                'pool': int(pool),
-                 }])
-            # Prediction
-        prediction = model.predict(input_data)[0]
-            # Save prediction
-        predicted_price = prediction
-        return render(request, 'predict_house.html', { 'predicted_price': predicted_price})
+            input_data = pd.DataFrame([[
+                rera,
+                bhk_no,
+                square_ft,
+                ready_to_move,
+                resale
+            ]], columns=[
+                'RERA',
+                'BHK_NO.',
+                'SQUARE_FT',
+                'READY_TO_MOVE',
+                'RESALE'
+            ])
 
-        
-    else:
-        predicted_price=0
-       
-        return render(request, 'predict_house.html', { 'predicted_price': predicted_price})
+            raw_prediction = model.predict(input_data)[0]
+            prediction = f"₹ {raw_prediction:,.2f} Lakhs"
+
+
+        except Exception as e:
+            prediction = f"Error: {str(e)}"
+
+
+    return render(request, "predict_house.html", {"prediction": prediction})
