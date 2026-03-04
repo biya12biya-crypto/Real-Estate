@@ -27,4 +27,6 @@ urlpatterns = [
   path("regaccept/<int:id>",views.regaccept,name='regaccept'),
   path("adminviewpayment/",views.adminviewpayment,name='adminviewpayment'),
    path("bestpro/",views.bestpro,name='bestpro'),
+   path('seller_payments/', views.seller_payment_list, name='seller_payment_list'),
+path('seller_payment_excel/', views.seller_payment_excel, name='seller_payment_excel'),
     ]

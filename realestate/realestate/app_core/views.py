@@ -1,12 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from app_core.models import Buyer, Category, District, Location, Property, Seller, payment
 from realestate.users.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.core.mail import send_mail
 from django.db.models import Count
+from openpyxl import Workbook
+
 
 
 # Create your views here.
@@ -251,7 +252,8 @@ def adminviewpayment(request):
        payments =payment.objects.all()
        return render(request, "adminviewpayment.html", {"adminviewpayment": payments})
 
-
+@never_cache
+@login_required(login_url='/login/')
 def bestpro(request):
 
     property_data = (
@@ -271,4 +273,52 @@ def bestpro(request):
     return render(request, 'bestpro.html', {
         'labels': labels,
         'data': data,
+    })
+
+
+
+
+
+@never_cache
+@login_required(login_url='/login/')
+def seller_payment_excel(request):
+
+    # Logged-in seller
+    seller = request.user
+
+    # Seller payments
+    payments = payment.objects.filter(user=seller)
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Seller Payments"
+
+    # Excel headers
+    headers = ['Payment Date', 'Duration', 'Amount', 'Expiry Date']
+    ws.append(headers)
+
+    # Add data
+    for pay in payments:
+        ws.append([
+            pay.payment_date.strftime("%Y-%m-%d"),
+            pay.duration,
+            float(pay.amount) if pay.amount else 0,
+            pay.expiry_date.strftime("%Y-%m-%d"),
+        ])
+
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = 'attachment; filename="seller_payments.xlsx"'
+
+    wb.save(response)
+    return response
+
+@login_required
+def seller_payment_list(request):
+
+    payments = payment.objects.filter(user=request.user)
+
+    return render(request, "Seller/seller_payment_list.html", {
+        "payments": payments
     })
