@@ -5,8 +5,8 @@ from realestate.users.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.core.mail import send_mail
-from django.db.models import Count
-from openpyxl import Workbook
+# from django.db.models import Count
+# from openpyxl import Workbook
 
 
 
@@ -274,6 +274,7 @@ def bestpro(request):
         'labels': labels,
         'data': data,
     })
+
 
 
 

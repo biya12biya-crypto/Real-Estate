@@ -1,14 +1,36 @@
 {% load static %}
-{% include 'Layout/Partials/seller/header.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Plan - KeralaNest</title>
 
     <style>
-      
 
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: #0d6efd;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
         h1 {
             text-align: center;
             margin-bottom: 40px;
             color: #333;
+        }
+
+        .plan-class {
+            padding: 40px 20px;
         }
 
         .plans {
@@ -43,21 +65,10 @@
             margin-bottom: 20px;
         }
 
-        .features {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 25px;
-        }
-
-        .features li {
-            margin: 10px 0;
-            color: #555;
-        }
-
         .btn {
             display: inline-block;
             padding: 12px 25px;
-            background: #007bff;
+            background: #0d6efd;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
@@ -65,46 +76,88 @@
         }
 
         .btn:hover {
-            background: #0056b3;
+            background: #084298;
         }
+
+        /* Back link */
+        .back-link {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #0d6efd;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: #0d6efd;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+
     </style>
-  <div id="home-section">
+</head>
 
+<body>
 
-<div class="plan-class">
-    <h1>Select a Plan to Add Your Property</h1>
+    <!-- Header -->
+    <div class="header">
+        KeralaNest Property Plans
+    </div>
 
-    <div class="plans">
+    <div id="home-section">
 
-        <!-- 3 Month Plan -->
-        <div class="plan-card">
-            <h2>Basic Plan</h2>
-            <div class="price">₹999</div>
-            <div class="duration">3 Months</div>
-            
-            <a href="{% url 'seller:payment2' 3 %}" class="btn">Choose Plan</a>
-        </div>
+        <div class="plan-class">
+            <h1>Select a Plan to Add Your Property</h1>
 
-        <!-- 6 Month Plan -->
-        <div class="plan-card">
-            <h2>Standard Plan</h2>
-            <div class="price">₹1799</div>
-            <div class="duration">6 Months</div>
-            
-            <a href="{% url 'seller:payment2' 6 %}" class="btn">Choose Plan</a>
-        </div>
+            <div class="plans">
 
-        <!-- 1 Year Plan -->
-        <div class="plan-card">
-            <h2>Premium Plan</h2>
-            <div class="price">₹2999</div>
-            <div class="duration">1 Year</div>
-           
-            <a href="{% url 'seller:payment2' 12 %}" class="btn">Choose Plan</a>
+                <!-- 3 Month Plan -->
+                <div class="plan-card">
+                    <h2>Basic Plan</h2>
+                    <div class="price">₹999</div>
+                    <div class="duration">3 Months</div>
+                    <a href="{% url 'seller:payment2' 3 %}" class="btn">Choose Plan</a>
+                </div>
+
+                <!-- 6 Month Plan -->
+                <div class="plan-card">
+                    <h2>Standard Plan</h2>
+                    <div class="price">₹1799</div>
+                    <div class="duration">6 Months</div>
+                    <a href="{% url 'seller:payment2' 6 %}" class="btn">Choose Plan</a>
+                </div>
+
+                <!-- 1 Year Plan -->
+                <div class="plan-card">
+                    <h2>Premium Plan</h2>
+                    <div class="price">₹2999</div>
+                    <div class="duration">1 Year</div>
+                    <a href="{% url 'seller:payment2' 12 %}" class="btn">Choose Plan</a>
+                </div>
+
+            </div>
         </div>
 
     </div>
-</div>
-</div>
 
-{% include 'Layout/Partials/seller/footer.html' %}
+    <!-- Back to Login -->
+    <div class="back-link">
+        <a href="{% url 'dashboard:login' %}">← Back to Login</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2026 KeralaNest. All rights reserved.
+    </div>
+
+</body>
+</html>
