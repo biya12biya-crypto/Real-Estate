@@ -1,11 +1,7 @@
 ({% load static %})
 {% include 'Layout/Partials/Admin/header.html' %}
 
-        <!--**********************************
-            Content body start
-        ***********************************-->
-        <div class="content-body">
-            <div class="container-fluid">
+
                 <div class="row">
 <div class="col-12">
               <div class="card">
@@ -14,7 +10,7 @@
                     <div>
                       <h4 class="card-title">District View</h4>
                       <p class="card-subtitle">
-                        
+
                       </p>
                     </div>
                     <div class="ms-auto mt-3 mt-md-0">
@@ -58,7 +54,7 @@
                           <td class="px-0">
                             {{i.name}}
                                 </td>
-                                
+
                            <td class="px-0">
                             <a href ="{% url 'core:distde' i.id %}">
                             <button class="btn btn-danger btn-sm">Delete</button></a>
@@ -67,7 +63,7 @@
                             <a href ="{% url 'core:districtup' i.id %}">
                             <button class="btn btn-secondary btn-sm">Edit</button></a>
                           </td>
-                            
+
                           <!-- <td class="px-0 text-dark fw-medium text-end">
                             $3.9K
                           </td> -->
@@ -77,6 +73,5 @@
                     </table>
                   </div>
                 </div>
-              </div>
-            </div>
+
             {% include 'Layout/Partials/Admin/footer.html' %}

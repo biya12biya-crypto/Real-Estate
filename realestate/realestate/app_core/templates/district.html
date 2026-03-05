@@ -1,20 +1,19 @@
 {% load static %}
 {% include "Layout/Partials/Admin/header.html" %}
-  <div class="body-wrapper-inner">
-        <div class="container-fluid">
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title fw-semibold mb-4">Forms</h5>
               <div class="card">
                 <div class="card-body">
                   <form method="POST" action="{% url 'core:dist' %}">
-			{% csrf_token %} 
+			{% csrf_token %}
                     <div class="mb-3">
                       <label for="exampleInputdistname" class="form-label">District Name</label>
                       <input type="text" class="form-control" id="exampleInputdistname" name="distname" aria-describedby="nameHelp">
                       <div id="nameHelp" class="form-text"></div>
                     </div>
-                    
+
                     <!-- <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                       <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -54,6 +53,5 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
+
      {% include "Layout/Partials/Admin/footer.html" %}

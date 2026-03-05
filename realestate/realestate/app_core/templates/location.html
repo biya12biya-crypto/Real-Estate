@@ -1,19 +1,18 @@
 {% load static %}
 {% include "Layout/Partials/Admin/header.html" %}
-  <div class="body-wrapper-inner">
-        <div class="container-fluid">
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title fw-semibold mb-4">Forms</h5>
               <div class="card">
                 <div class="card-body">
                   <form method="POST" action="{% url 'core:location' %}">
-			{% csrf_token %} 
+			{% csrf_token %}
                     <div class="mb-3">
                       <label for="exampleInputdistname" class="form-label">Location Name</label>
                       <input type="text" class="form-control" id="exampleInputdistname" name="locationname" aria-describedby="nameHelp">
                        <label for="exampleInputdistname" class="form-label">District Name</label>
-    
+
                       <select name="name1" class="form-control" id="exampleInputdistname" aria-describedby="nameHelp">
                       <option value="">Select District</option>
                         {% for i in list %}
@@ -24,7 +23,7 @@
 
 
                     </div>
-                    
+
                     <!-- <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                       <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -64,6 +63,5 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
+
     {% include "Layout/Partials/Admin/footer.html" %}

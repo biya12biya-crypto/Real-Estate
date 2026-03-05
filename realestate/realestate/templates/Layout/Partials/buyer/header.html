@@ -11,6 +11,25 @@
   <link rel="stylesheet" href="{% static 'seller/fonts/icomoon/style.css' %}">
   <link rel="stylesheet" href="{% static 'seller/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'seller/css/style.css' %}">
+  <style>
+    .dropdown-menu{
+border-radius:8px;
+padding:5px 0;
+}
+
+.dropdown-item:hover{
+background:#f5f5f5;
+  color:black;
+}
+.dropdown-menu .dropdown-item {
+  color: #000 !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  color: #000 !important;
+  background-color: #f5f5f5;
+}
+  </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -54,10 +73,24 @@
               <li class="ml-3">
                 <a href="{% url 'buyer:viewcategory' %}" class="nav-link">Categories</a>
               </li>
+<li class="ml-3 dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+    Messages
+  </a>
 
-              <li class="ml-3">
-                <a href="{% url 'buyer:modalview' %}" class="nav-link">Seller's Replies</a>
-              </li>
+  <div class="dropdown-menu">
+
+    <a class="dropdown-item" href="{% url 'buyer:enquiry' %}">
+      Enquiries
+    </a>
+
+    <a class="dropdown-item" href="{% url 'buyer:modalview' %}">
+      Seller's Replies
+    </a>
+
+  </div>
+</li>
+
 
               <li class="ml-3">
                 <a href="{% url 'buyer:predict_house' %}" class="nav-link">Price Prediction</a>
@@ -67,9 +100,7 @@
                 <a href="{% url 'buyer:favorite' %}" class="nav-link">Favorites</a>
               </li>
 
-              <li class="ml-3">
-                <a href="{% url 'buyer:enquiry' %}" class="nav-link">Enquiries</a>
-              </li>
+
 
               {% if request.user.role == 'both' %}
               <li class="ml-3">

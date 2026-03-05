@@ -1,20 +1,19 @@
 {% load static %}
 {% include 'Layout/Partials/buyer/header.html' %}
+<style>
+  .site-section{
+padding-top:150px;
+padding-bottom:40px;
+}
+</style>
 <div class="site-section" id="properties-section">
 
   <div class="container">
-    <div class="row mb-5 align-items-center">
-      <div class="col-md-7 text-left">
-
-        <h2 class="section-title mb-3 text-lg-end">CATEGORIES</h2>
-      </div>
-      <!-- <div class="col-md-5 text-left text-md-right">
-        <div class="custom-nav1">
-          <a href="#" class="custom-prev1">Previous</a><span class="mx-3">/</span><a href="#"
-            class="custom-next1">Next</a>
-        </div>
-      </div> -->
-    </div>
+<div class="row mb-4">
+  <div class="col-12 text-center">
+    <h2 class="section-title fw-bold text-warning">CATEGORIES</h2>
+  </div>
+</div>
 
     <div class="row">
       {% for i in category %}
