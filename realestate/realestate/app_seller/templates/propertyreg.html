@@ -6,135 +6,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Add Your Property</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<title>Add Your Property</title>
 
-        .form-container {
-            max-width: 700px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-        }
+<style>
 
-        h2 {
-            margin-bottom: 20px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #eef5f4;
+    margin: 0;
+    padding: 0;
+}
 
-        label {
-            font-weight: 600;
-            display: block;
-            margin-top: 15px;
-        }
+/* FORM BOX */
 
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+.form-container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    border-top: 5px solid #0b5d59;
+}
 
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+/* TITLE */
 
-        .btn {
-            margin-top: 25px;
-            background: #0d6efd;
-            color: rgb(131, 120, 120);
-            border: none;
-            padding: 12px;
-            width: 100%;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+h2 {
+    margin-bottom: 20px;
+}
 
-        .btn:hover {
-            background: #171717;
-        }
-    </style>
+/* LABEL */
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-top: 15px;
+    color: #0b5d59;
+}
+
+/* INPUTS */
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #cbd5d1;
+    border-radius: 6px;
+}
+
+/* INPUT FOCUS */
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0b5d59;
+    box-shadow: 0 0 5px rgba(11,93,89,0.3);
+}
+
+/* TEXTAREA */
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* BUTTON */
+
+.btn {
+    margin-top: 25px;
+    background: linear-gradient(45deg,#0b5d59,#0f766e);
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* BUTTON HOVER */
+
+.btn:hover {
+    background: #094845;
+}
+
+</style>
 </head>
+
 <body>
-                        <div class="row">
-    
+
+<div class="row">
+
 <div class="form-container">
-     <h1 class="text-primary fw-bold mb-4">Add Property</h1>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-         <div class="row">
-        <!-- Property Name -->
-          <div class="col-md-6">
-        <label>Property Name</label>
-        <input type="text" name="name" required>
-  </div>
-        <!-- Location -->
-          <div class="col-md-6">
-        <label>Location</label>
-        <input type="text" name="location_url" required>
-  </div>
-        <!-- Property Type -->
-          <div class="col-md-6">
-         <label>Property Type</label>
-        <select name="type" required>
-            <option value="">Select Type</option>
-               {% for i in list %}
-                        <option value="{{i.id}}">{{i.name}}</option>
-                        {% endfor %}
-                      </select>
-        </select>
+<h1 class="text-primary fw-bold mb-4">Add Property</h1>
 
-  </div>
+<form method="post" enctype="multipart/form-data">
 
-        <!-- Image -->
-          <div class="col-md-6">
-        <label>Property Image</label>
-        <input type="file" name="img" accept="image/*" multiple required>
-  </div>
-  <div class="col-md-6">
-        <label>Documents</label>
-        <input type="file" name="doc" accept="image/*" multiple required>
-  </div>
-        <!-- Status -->
-          <div class="col-md-6">
-        <label>Status</label>
-        <select name="status" required>
-            <option value="Available">Available</option>
-            <option value="Not Available">Not Available</option>
-        </select>
-  </div>
-        <!-- Price -->
-          <div class="col-md-6">
-        <label>Price</label>
-        <input type="number" name="price" required>
-  </div>
-        <!-- Description -->
-          <div class="col-md-6">
-        <label>Description</label>
-        <textarea name="description" required></textarea>
-  </div>
+{% csrf_token %}
 
-   <!-- Location_url -->
-          <div class="col-md-6">
-        <label>Location_url</label>
-         <input type="text" name="location_url" required>
-  </div>
-        <!-- Submit -->
-        <button type="submit" class="btn">Add Property</button>
-    </form>
+<div class="row">
+
+<div class="col-md-6">
+<label>Property Name</label>
+<input type="text" name="name" required>
 </div>
+
+<div class="col-md-6">
+<label>Location</label>
+<input type="text" name="location_url" required>
 </div>
+
+<div class="col-md-6">
+<label>Property Type</label>
+<select name="type" required>
+<option value="">Select Type</option>
+{% for i in list %}
+<option value="{{i.id}}">{{i.name}}</option>
+{% endfor %}
+</select>
 </div>
+
+<div class="col-md-6">
+<label>Property Image</label>
+<input type="file" name="img" accept="image/*" multiple required>
 </div>
+
+<div class="col-md-6">
+<label>Documents</label>
+<input type="file" name="doc" accept="image/*" multiple required>
+</div>
+
+<div class="col-md-6">
+<label>Status</label>
+<select name="status" required>
+<option value="Available">Available</option>
+<option value="Not Available">Not Available</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Price</label>
+<input type="number" name="price" required>
+</div>
+
+<div class="col-md-6">
+<label>Description</label>
+<textarea name="description" required></textarea>
+</div>
+
+<div class="col-md-6">
+<label>Location_url</label>
+<input type="text" name="location_url" required>
+</div>
+
+<button type="submit" class="btn">Add Property</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
 </html>
+</div>
+</div>
 {% include 'Layout/Partials/seller/footer.html' %}

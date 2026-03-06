@@ -29,15 +29,23 @@
           <!-- <td>{{ seller.name }}</td> -->
           <td>{{ i.name }}, {{ i.location_url }}, {{ i.status }}</td>
           <td>{{ i.type.name }}</td>
-          <td> {% with i.images.first as img %}
+          <!-- <td> {% with i.images.first as img %}
             {% if img and img.img %}
             <img src="{{ img.img.url }}" alt="{{ i.name }}" width="100">
             {% else %}
             No Image
             {% endif %}
             {% endwith %}
-          </td>
-
+          </td> -->
+<td>
+    {% if i.images.all %}
+        {% for img in i.images.all %}
+            <img src="{{ img.img.url }}" alt="{{ i.name }}" width="100" style="margin:3px;">
+        {% endfor %}
+    {% else %}
+        No Image
+    {% endif %}
+</td>
           <td>{{ i.price }}</td>
 
           <td class="col-md-4">{{ i.description }}</td>
@@ -52,7 +60,7 @@
 
 
 
-          <td>
+          <!-- <td>
             {% with i.documents.first as doc %}
             {% if doc and doc.doc %}
             <a href="{{ doc.doc.url }}" target="_blank" class="btn btn-primary btn-sm">
@@ -62,8 +70,16 @@
             No Documents
             {% endif %}
             {% endwith %}
-          </td>
-
+          </td> -->
+<td>
+{% for doc in i.documents.all %}
+    <a href="{{ doc.doc.url }}" target="_blank" class="btn btn-sm btn-outline-primary mb-1">
+        Document {{ forloop.counter }}
+    </a>
+{% empty %}
+    No Documents
+{% endfor %}
+</td>
 
 
 

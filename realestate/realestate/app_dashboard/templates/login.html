@@ -8,75 +8,217 @@
 
 {% include 'Layout/Partials/guest/header.html' %}
 
-<div class="hero page-inner overlay" style="background-image: url('images/hero_bg_1.jpg')">
-  <div class="container">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-lg-9 text-center mt-5">
-        <h1 class="heading" data-aos="fade-up">KeralaNest</h1>
 
-        <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
-          <ol class="breadcrumb text-center justify-content-center">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active text-white-50" aria-current="page">
-              Contact
-            </li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-  </div>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>KeralaNest Login</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#f4f8f7;
+}
+
+/* MAIN LOGIN CONTAINER */
+
+.login-container{
+    height:100vh;
+}
+
+/* LEFT IMAGE SECTION */
+
+.login-image{
+    background:url('{% static "images/hero_bg_1.jpg" %}') center/cover no-repeat;
+    position:relative;
+}
+
+.login-image::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,#0b5d59,#0f766e);
+    opacity:.85;
+}
+
+.brand-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    text-align:center;
+    z-index:2;
+}
+
+.brand-text h1{
+    font-size:55px;
+    font-weight:700;
+    letter-spacing:3px;
+}
+
+.brand-text p{
+    font-size:18px;
+    opacity:.9;
+}
+
+/* RIGHT LOGIN SECTION */
+
+.login-form-section{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:white;
+}
+
+/* LOGIN CARD */
+
+.login-card{
+    width:380px;
+}
+
+.login-title{
+    font-size:30px;
+    font-weight:600;
+    margin-bottom:25px;
+    color:#0b5d59;
+}
+
+/* INPUTS */
+
+.form-control{
+    height:48px;
+    border-radius:8px;
+    border:1px solid #cbd5d1;
+}
+
+.form-control:focus{
+    border-color:#0b5d59;
+    box-shadow:0 0 6px rgba(11,93,89,.3);
+}
+
+/* LOGIN BUTTON */
+
+.btn-login{
+    background:linear-gradient(45deg,#0b5d59,#0f766e);
+    border:none;
+    color:white;
+    font-weight:600;
+    padding:10px;
+    border-radius:30px;
+    width:100%;
+    transition:.3s;
+}
+
+.btn-login:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(11,93,89,.4);
+}
+
+/* LINKS */
+
+a{
+    text-decoration:none;
+    color:#0b5d59;
+}
+
+a:hover{
+    color:#064e4a;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.login-image{
+display:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container-fluid login-container">
+
+<div class="row h-100">
+
+<!-- LEFT IMAGE -->
+
+<div class="col-lg-6 login-image">
+
+<div class="brand-text">
+<h1>KeralaNest</h1>
+<p>Find Your Dream Home,Land,Apartment&Villa</p>
 </div>
 
-<div class="section">
-  <div class="container">
-    <div class="row">
-      <h3 class="text-center">Login</h3>
-      <div class="col-lg-2" data-aos="fade-up" data-aos-delay="200"></div>
-      
-      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-        <form method="POST" action="{% url 'dashboard:login' %}">
-          {% csrf_token %} 
-          <div class="row">
-            
-            <div class="col-12 mb-3">
-             <input class="form-control" name="username" type="text" 
-placeholder="Enter Username" 
-                                    required minlength="5" title="Username must be at least 5 characters 
-long.">
-            </div>
-           <div class="col-12 mb-3">
-             
-              <label class="form-label">Password</label>
-                 <input class="form-control" name="password" type="password" 
-placeholder="Enter Password"                                     required minlength="7" 
-title="Password must be at least 7 characters long."> 
-             
-    
-            </div>
-
-             
-            <div class="text-center mt-4">
-             
-                <button type="submit" class="btn btn-success px-5 py-2">
-                Login
-              </button>
-               <a href="{% url 'dashboard:forget' %}" class="text-decoration-none">
-      Forgot password?
-    </a>
-            </div>
-
-          <div class="mt-3 text-center">
-             Don't have an account?
-         
-          <div class="mt-3 text-center">
-             
-             <a href="{% url 'dashboard:register' %}">Sign up</a>
-           </div>
-
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
+
+
+<!-- RIGHT LOGIN FORM -->
+
+<div class="col-lg-6 login-form-section">
+
+<div class="login-card">
+
+<div class="login-title">Login</div>
+
+<form method="POST" action="{% url 'dashboard:login' %}">
+
+{% csrf_token %}
+
+<div class="mb-3">
+<input class="form-control"
+name="username"
+type="text"
+placeholder="Enter Username"
+required minlength="5">
+</div>
+
+
+<div class="mb-3">
+<input class="form-control"
+name="password"
+type="password"
+placeholder="Enter Password"
+required minlength="7">
+</div>
+
+
+<button type="submit" class="btn-login">
+Login
+</button>
+
+<div class="mt-3 text-center">
+<a href="{% url 'dashboard:forget' %}">Forgot password?</a>
+</div>
+
+<div class="mt-3 text-center">
+Don't have an account?
+<a href="{% url 'dashboard:register' %}">Sign up</a>
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
 {% include 'Layout/Partials/guest/footer.html' %}
