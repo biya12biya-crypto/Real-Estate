@@ -170,7 +170,7 @@ def buyerregview(request):
 @never_cache
 @login_required(login_url='/login/')
 def adminviewproperty(request):
-       adminv =Property.objects.all()
+       adminv =Property.objects.filter(registrar__isnull=True)
        return render(request, "adminviewproperty.html", {"adminviewproperty": adminv})
        
 
