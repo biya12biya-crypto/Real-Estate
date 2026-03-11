@@ -14,12 +14,31 @@ from django.core.mail import send_mail
 from app_dashboard.models import Otp
 import random
 from django.contrib.auth.hashers import make_password
-
+from django.db.models import Count
 
 @never_cache
 @login_required(login_url='/login/')
 def admin(request):
-    return render(request, 'admindashboard.html')
+         property_data = (
+        Property.objects
+        .annotate(total_enquiry=Count('property_enquiry'))
+        .order_by('-total_enquiry')
+    )
+
+         labels = []
+         data = []
+
+         for prop in property_data:
+          if prop.total_enquiry > 0:
+            labels.append(prop.name)
+            data.append(prop.total_enquiry)
+
+         return render(request, 'admindashboard.html', {
+        'labels': labels,
+        'data': data,
+    })
+
+ 
 
 @never_cache
 @login_required(login_url='/login/')

@@ -1,141 +1,111 @@
 {% load static %}
  {% include 'Layout/Partials/seller/header.html' %} 
- <div class="container">
 
-<div class="table-content">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Your Property</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 0;
-        }
 
-        .form-container {
-            max-width: 700px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-        }
+<div class="container mt-5">
 
-        h2 {
-            margin-bottom: 20px;
-        }
+<div class="row justify-content-center">
 
-        label {
-            font-weight: 600;
-            display: block;
-            margin-top: 15px;
-        }
+<div class="col-md-8">
 
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+<div class="card shadow">
 
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+<div class="card-header bg-primary text-white">
+<h4 class="mb-0">Edit Property</h4>
+</div>
 
-        .btn {
-            margin-top: 25px;
-            background: #0d6efd;
-            color: rgb(131, 120, 120);
-            border: none;
-            padding: 12px;
-            width: 100%;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+<div class="card-body">
 
-        .btn:hover {
-            background: #171717;
-        }
-    </style>
-</head>
-<body>
-                        <div class="row">
-    
-<div class="form-container">
-     <h1 class="text-primary fw-bold mb-4">Edit Property</h1>
+<form method="post" enctype="multipart/form-data" action="{% url 'propertyedit' property.id %}">
+{% csrf_token %}
 
-    <form method="post" enctype="multipart/form-data"  action="{% url 'seller:propertyedit' propertyedit.id %}">
-			{% csrf_token %}>
-       
-         <div class="row">
-        <!-- Property Name -->
-          <div class="col-md-6">
-        <label>Property Name</label>
-        <input type="text" name="name" required>
-  </div>
-        <!-- Location -->
-          <div class="col-md-6">
-        <label>Location</label>
-        <input type="text" name="location_url" required>
-  </div>
-        <!-- Property Type -->
-          <div class="col-md-6">
-         <label>Property Type</label>
-        <select name="type" required>
-            <option value="">Select Type</option>
-               {% for i in list %}
-                        <option value="{{i.id}}">{{i.name}}</option>
-                        {% endfor %}
-                      </select>
-        </select>
+<div class="row">
 
-  </div>
+<!-- Property Name -->
+<div class="col-md-6 mb-3">
+<label class="form-label">Property Name</label>
+<input type="text" name="name" class="form-control" value="{{ property.name }}" required>
+</div>
 
-        <!-- Image -->
-          <div class="col-md-6">
-        <label>Property Image</label>
-        <input type="file" name="img" accept="image/*" multiple required>
-  </div>
-  <div class="col-md-6">
-        <label>Documents</label>
-        <input type="file" name="doc" accept="image/*" multiple required>
-  </div>
-        <!-- Status -->
-          <div class="col-md-6">
-        <label>Status</label>
-        <select name="status" required>
-            <option value="Available">Available</option>
-            <option value="Not Available">Not Available</option>
-        </select>
-  </div>
-        <!-- Price -->
-          <div class="col-md-6">
-        <label>Price</label>
-        <input type="number" name="price" required>
-  </div>
-        <!-- Description -->
-          <div class="col-md-6">
-        <label>Description</label>
-        <textarea name="description" required></textarea>
-  </div>
+<!-- Location -->
+<div class="col-md-6 mb-3">
+<label class="form-label">Location URL</label>
+<input type="text" name="location_url" class="form-control" value="{{ property.location_url }}" required>
+</div>
 
-   <!-- Location_url -->
-          <div class="col-md-6">
-        <label>Location_url</label>
-         <input type="text" name="location_url" required>
-  </div>
-        <!-- Submit -->
-        <button type="submit" class="btn" >Edit</button>
-    </form>
+<!-- Property Type -->
+<div class="col-md-6 mb-3">
+<label class="form-label">Property Type</label>
+<select name="type" class="form-control" required>
+
+<option value="">Select Type</option>
+
+{% for i in list %}
+<option value="{{ i.id }}" {% if property.type.id == i.id %}selected{% endif %}>
+{{ i.name }}
+</option>
+{% endfor %}
+
+</select>
+</div>
+
+<!-- Status -->
+<div class="col-md-6 mb-3">
+<label class="form-label">Status</label>
+<select name="status" class="form-control" required>
+
+<option value="Available" {% if property.status == "Available" %}selected{% endif %}>
+Available
+</option>
+
+<option value="Not Available" {% if property.status == "Not Available" %}selected{% endif %}>
+Not Available
+</option>
+
+</select>
+</div>
+
+<!-- Price -->
+<div class="col-md-6 mb-3">
+<label class="form-label">Price</label>
+<input type="number" name="price" class="form-control" value="{{ property.price }}" required>
+</div>
+
+<!-- Description -->
+<div class="col-md-12 mb-3">
+<label class="form-label">Description</label>
+<textarea name="description" class="form-control" rows="4" required>{{ property.description }}</textarea>
+</div>
+
+<!-- Image Upload -->
+<div class="col-md-6 mb-3">
+<label class="form-label">Add New Images</label>
+<input type="file" name="img" class="form-control" multiple>
+</div>
+
+<!-- Document Upload -->
+<div class="col-md-6 mb-3">
+<label class="form-label">Add New Documents</label>
+<input type="file" name="doc" class="form-control" multiple>
+</div>
+
+</div>
+
+<button type="submit" class="btn btn-success w-100">
+Update Property
+</button>
+
+</form>
+
 </div>
 </div>
+
 </div>
 </div>
-</html>
+
+</div>
+
+
+
+
 {% include 'Layout/Partials/seller/footer.html' %}

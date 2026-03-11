@@ -163,32 +163,83 @@ def payment2(request, plan):
     return render(request, 'payment2.html', context)   
 
 
+# @never_cache
+# @login_required(login_url='/login/')
+# def propertyedit(request,id):
+#     up = Property.objects.get(id=id)
+#     if request.method=="POST":
+#         name=request.POST.get('name')
+#         location_url=request.POST.get('location_url')
+#         type=request.POST.get('type')
+#         status=request.POST.get('status')
+#         price=request.POST.get('price')   
+#         description=request.POST.get('description')
+#         if Property.objects.filter(name=name,location_url=location_url).exists():
+#             return HttpResponse("<script>alert('This Property already Exists');window.location='/seller/propertyreg/';</script>") 
+#         p=Property(name=name,location_url=location_url,type=Category.objects.get(id=type),status=status,price=price,description=description,user=request.user)
+#         p.type=Category.objects.get(id = type)
+#         p.save()
+#         images = request.FILES.getlist('img')
+#         for img in images:
+#             PropertyImage.objects.create(
+#                 property=p,
+#                 img=img
+#             )
+#         documents = request.FILES.getlist('doc')
+#         for doc in documents:
+#             Document.objects.create(
+#                 property=p,
+#                 doc=doc
+#             )
+#     return HttpResponse("<script>alert('Property Edited successfully');window.location='/sellerdashboard/';</script>") 
+
 @never_cache
 @login_required(login_url='/login/')
-def propertyedit(request,id):
+def propertyedit(request, id):
+
     up = Property.objects.get(id=id)
-    if request.method=="POST":
-        name=request.POST.get('name')
-        location_url=request.POST.get('location_url')
-        type=request.POST.get('type')
-        status=request.POST.get('status')
-        price=request.POST.get('price')   
-        description=request.POST.get('description')
-        if Property.objects.filter(name=name,location_url=location_url).exists():
-            return HttpResponse("<script>alert('This Property already Exists');window.location='/seller/propertyreg/';</script>") 
-        p=Property(name=name,location_url=location_url,type=Category.objects.get(id=type),status=status,price=price,description=description,user=request.user)
-        p.type=Category.objects.get(id = type)
-        p.save()
+    list = Category.objects.all()
+
+    if request.method == "POST":
+
+        up.name = request.POST.get('name')
+        up.location_url = request.POST.get('location_url')
+        type_id = request.POST.get('type')
+        up.type = Category.objects.get(id=type_id)
+        up.status = request.POST.get('status')
+        up.price = request.POST.get('price')
+        up.description = request.POST.get('description')
+
+        up.save()
+
         images = request.FILES.getlist('img')
         for img in images:
             PropertyImage.objects.create(
-                property=p,
+                property=up,
                 img=img
             )
+
         documents = request.FILES.getlist('doc')
         for doc in documents:
             Document.objects.create(
-                property=p,
+                property=up,
                 doc=doc
             )
-    return HttpResponse("<script>alert('Property Edited successfully');window.location='/sellerdashboard/';</script>") 
+
+        return HttpResponse("<script>alert('Property Edited Successfully');window.location='/sellerdashboard/';</script>")
+
+    return render(request, "propertyedit.html", {
+        "property": up,
+        "list": list
+    })
+
+
+
+@never_cache
+@login_required(login_url='/login/')
+def propertydl(request, id):
+
+    d = Property.objects.get(id=id)
+    d.delete()
+
+    return HttpResponse("<script>alert('Delete Successfully');window.location='/sellerdashboard/';</script>")

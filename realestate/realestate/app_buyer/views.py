@@ -22,7 +22,7 @@ model = joblib.load(model_path, "rb")
 @never_cache
 @login_required(login_url='/login/')
 def viewproperty(request,id):
-    c=Property.objects.filter(type=id,approval_status="accepted", registrar_status="approved")
+    c=Property.objects.filter(type=id , registrar_status="approved")
     return render(request, 'viewproperty.html',{"propertyregview":c})
 
 @never_cache
