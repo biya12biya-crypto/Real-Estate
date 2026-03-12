@@ -55,7 +55,7 @@
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="{% url 'dashboard:sellerdashboard' %}" class="nav-link">Home</a></li>
                 <li><a href="{% url 'seller:propertyreg' %}" class="nav-link">Add Property</a></li>
-                
+                <li><a href="{% url 'seller:propertyregview' %}" class="nav-link">My Property</a></li>
                 <li><a href="{% url 'seller:enquiryview' %}" class="nav-link">View Enquiries</a></li>
                  <li><a href="#contact-section" class="nav-link">Contact</a></li>
                 {% if request.user.role == 'both' %}

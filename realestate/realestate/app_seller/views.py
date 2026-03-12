@@ -50,11 +50,18 @@ def propertyreg(request):
 
     return render(request, 'propertyreg.html')
     
+# @never_cache
+# @login_required(login_url='/login/')
+# def propertyregview(request):
+#      pr =Property.objects.all()
+#      return render(request, "propertyregview.html", {"propertyregview": pr})
+
+
 @never_cache
 @login_required(login_url='/login/')
 def propertyregview(request):
-     pr =Property.objects.all()
-     return render(request, "propertyregview.html", {"propertyregview": pr})
+    pr = Property.objects.filter(user=request.user)
+    return render(request, "propertyregview.html", {"propertyregview": pr})
 
 @never_cache
 @login_required(login_url='/login/')
@@ -233,6 +240,23 @@ def propertyedit(request, id):
         "list": list
     })
 
+
+
+# @never_cache
+# @login_required(login_url='/login/')
+# def propertydl(request, id):
+#     try:
+#         d = Property.objects.get(id=id)
+#         # Check if user owns this property
+#         if d.user != request.user:
+#             return HttpResponse("<script>alert('You do not have permission to delete this property');window.location='/sellerdashboard/';</script>")
+        
+#         d.delete()
+#         return HttpResponse("<script>alert('Delete Successfully');window.location='/sellerdashboard/';</script>")
+#     except Property.DoesNotExist:
+#         return HttpResponse("<script>alert('Property not found');window.location='/sellerdashboard/';</script>")
+#     except Exception as e:
+#         return HttpResponse("<script>alert('Error deleting property: {{ e }}');window.location='/sellerdashboard/';</script>")
 
 
 @never_cache

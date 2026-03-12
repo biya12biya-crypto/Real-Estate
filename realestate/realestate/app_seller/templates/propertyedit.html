@@ -16,7 +16,7 @@
 
 <div class="card-body">
 
-<form method="post" enctype="multipart/form-data" action="{% url 'propertyedit' property.id %}">
+<form method="post" enctype="multipart/form-data" action="{% url 'seller:propertyedit' property.id %}">
 {% csrf_token %}
 
 <div class="row">
