@@ -16,6 +16,7 @@ import random
 from django.contrib.auth.hashers import make_password
 from django.db.models import Count
 
+
 @never_cache
 @login_required(login_url='/login/')
 def admin(request):
